@@ -1,0 +1,15 @@
+package models
+
+import "time"
+
+type Concert struct {
+	ID          int       `gorm:"primaryKey;autoIncrement" json:"id"`
+	Title       string    `gorm:"not null" json:"title" binding:"required"`
+	Description string    `gorm:"type:text" json:"description"`
+	Date        time.Time `gorm:"not null" json:"date" binding:"required"`
+	Venue       string    `gorm:"not null" json:"venue" binding:"required"`
+	Status      string    `gorm:"default:active" json:"status"`
+	CreatedAt   time.Time `gorm:"autoCreateTime" json:"created_at"`
+	UpdatedAt   time.Time `gorm:"autoUpdateTime" json:"updated_at"`
+	DeletedAt   time.Time `gorm:"default:null" json:"deleted_at,omitempty"`
+}
