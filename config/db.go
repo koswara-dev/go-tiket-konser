@@ -6,6 +6,7 @@ import (
 
 	"go-tiket-konser/models"
 
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -125,6 +126,28 @@ func InitDB() {
 			log.Println("failed to seed initial ticket categories: ", err)
 		} else {
 			log.Println("Database successfully seeded with 2 initial ticket categories")
+		}
+	}
+
+	// seeder admin user
+	var userCount int64
+	DB.Model(&models.User{}).Where("role = ?", "admin").Count(&userCount)
+	if userCount == 0 {
+		hashedPassword, err := bcrypt.GenerateFromPassword([]byte("Indonesia"), bcrypt.DefaultCost)
+		if err != nil {
+			log.Println("failed to hash admin password: ", err)
+		} else {
+			adminUser := models.User{
+				FullName: "Admin Konser",
+				Email:    "adminkonser@gmail.com",
+				Password: string(hashedPassword),
+				Role:     "admin",
+			}
+			if err := DB.Create(&adminUser).Error; err != nil {
+				log.Println("failed to seed admin user: ", err)
+			} else {
+				log.Println("Database successfully seeded with admin user")
+			}
 		}
 	}
 }
