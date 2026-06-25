@@ -20,7 +20,7 @@ type JWTClaims struct {
 }
 
 type AuthService interface {
-	Register(email, password, fullName string) error
+	Register(email, password, fullName string) (*models.User, error)
 	Login(email, password string) (string, error)
 	Logout(tokenString string) error
 	GetProfile(id uint) (*models.User, error)
@@ -37,17 +37,17 @@ func NewAuthService(userRepo repository.UserRepository, blacklistRepo repository
 }
 
 // Register
-func (s *authService) Register(email, password, fullName string) error {
+func (s *authService) Register(email, password, fullName string) (*models.User, error) {
 	// Check if email already exists
 	existingUser, err := s.userRepo.GetUserByEmail(email)
 	if err == nil && existingUser != nil {
-		return errors.New("email already registered")
+		return nil, errors.New("email already registered")
 	}
 
 	// Hash the password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
-		return errors.New("failed to hash password")
+		return nil, errors.New("failed to hash password")
 	}
 
 	role := "customer"
@@ -61,7 +61,11 @@ func (s *authService) Register(email, password, fullName string) error {
 	}
 
 	// Save the user to the database
-	return s.userRepo.CreateUser(&user)
+	err = s.userRepo.CreateUser(&user)
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
 
 // Login
