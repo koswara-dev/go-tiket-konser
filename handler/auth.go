@@ -49,14 +49,20 @@ func (h *AuthHandler) Register(c *gin.Context) {
 		return
 	}
 
+	var customerID uint
+	if user.Customer != nil {
+		customerID = uint(user.Customer.ID)
+	}
+
 	c.JSON(http.StatusCreated, gin.H{
 		"success": true,
 		"message": "User registered successfully",
 		"data": dto.UserResponse{
-			ID:       user.ID,
-			FullName: user.FullName,
-			Email:    user.Email,
-			Role:     user.Role,
+			ID:         user.ID,
+			FullName:   user.FullName,
+			Email:      user.Email,
+			Role:       user.Role,
+			CustomerID: customerID,
 		},
 	})
 }
@@ -154,14 +160,20 @@ func (h *AuthHandler) GetProfile(c *gin.Context) {
 		return
 	}
 
+	var customerID uint
+	if user.Customer != nil {
+		customerID = uint(user.Customer.ID)
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"success": true,
 		"message": "User profile retrieved successfully",
 		"data": dto.UserResponse{
-			ID:       user.ID,
-			FullName: user.FullName,
-			Email:    user.Email,
-			Role:     user.Role,
+			ID:         user.ID,
+			FullName:   user.FullName,
+			Email:      user.Email,
+			Role:       user.Role,
+			CustomerID: customerID,
 		},
 	})
 }

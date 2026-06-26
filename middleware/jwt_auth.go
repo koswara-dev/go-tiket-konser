@@ -54,6 +54,7 @@ func JWTAuth(blacklistRepo repository.BlacklistedTokenRepository) gin.HandlerFun
 		}
 
 		c.Set("user_id", claims.UserID)
+		c.Set("customer_id", claims.CustomerID)
 		c.Set("email", claims.Email)
 		c.Set("role", claims.Role)
 		c.Set("token", tokenString)

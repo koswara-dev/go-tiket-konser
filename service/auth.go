@@ -13,9 +13,10 @@ import (
 var JWTSecretKey = []byte("juara-coding-super-secret-key-2026-batch-1")
 
 type JWTClaims struct {
-	UserID uint   `json:"user_id"`
-	Email  string `json:"email"`
-	Role   string `json:"role"`
+	UserID     uint   `json:"user_id"`
+	CustomerID uint   `json:"customer_id,omitempty"`
+	Email      string `json:"email"`
+	Role       string `json:"role"`
 	jwt.RegisteredClaims
 }
 
@@ -52,12 +53,21 @@ func (s *authService) Register(email, password, fullName string) (*models.User, 
 
 	role := "customer"
 
+	var customer *models.Customer
+	if role == "customer" {
+		customer = &models.Customer{
+			Name:  fullName,
+			Email: email,
+		}
+	}
+
 	// Create the new user
 	user := models.User{
 		Email:    email,
 		Password: string(hashedPassword),
 		FullName: fullName,
 		Role:     role,
+		Customer: customer,
 	}
 
 	// Save the user to the database
@@ -83,10 +93,16 @@ func (s *authService) Login(email, password string) (string, error) {
 	}
 
 	// Generate the JWT token
+	var customerID uint
+	if user.Customer != nil {
+		customerID = uint(user.Customer.ID)
+	}
+
 	claims := JWTClaims{
-		UserID: user.ID,
-		Email:  user.Email,
-		Role:   user.Role,
+		UserID:     user.ID,
+		CustomerID: customerID,
+		Email:      user.Email,
+		Role:       user.Role,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),

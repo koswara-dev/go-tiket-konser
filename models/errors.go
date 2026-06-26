@@ -10,4 +10,8 @@ var (
 	ErrInvalidDate          = errors.New("invalid date")
 	ErrInvalidVenue         = errors.New("invalid venue")
 	ErrInvalidStatus        = errors.New("invalid status")
+	ErrBookingNotFound      = errors.New("booking not found")
+	ErrUnauthorize          = errors.New("unauthorized")
+	ErrUserNotFound         = errors.New("user not found")
+	ErrCustomerNotFound     = errors.New("customer not found")
 )

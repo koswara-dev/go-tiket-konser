@@ -54,7 +54,21 @@ func (h *BookingHandler) GetBookingByID(c *gin.Context) {
 		return
 	}
 
-	booking, err := h.service.GetBookingByID(id)
+	// 1. Ekstrak userId dan role hasil suntikan JWTAuthMiddleware
+	userIDVal, exists := c.Get("user_id")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Akses tidak sah"})
+		return
+	}
+	userID, ok := userIDVal.(uint)
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Tipe data user ID tidak valid"})
+		return
+	}
+	role := c.MustGet("role").(string)
+
+	// 2. kirim parameter audit keamanan layer service
+	booking, err := h.service.GetBookingByID(id, int(userID), role)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"success": false,

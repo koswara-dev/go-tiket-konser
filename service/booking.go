@@ -14,7 +14,7 @@ import (
 
 type BookingService interface {
 	CreateBooking(req *dto.BookingRequest) (models.Booking, error)
-	GetBookingByID(id int) (models.Booking, error)
+	GetBookingByID(id int, userID int, role string) (models.Booking, error)
 }
 
 type bookingService struct {
@@ -113,6 +113,21 @@ func (s *bookingService) CreateBooking(req *dto.BookingRequest) (models.Booking,
 	return finalBooking, errTx
 }
 
-func (s *bookingService) GetBookingByID(id int) (models.Booking, error) {
-	return s.bookingRepo.FindByID(id)
+func (s *bookingService) GetBookingByID(id int, userID int, role string) (models.Booking, error) {
+	booking, err := s.bookingRepo.FindByID(id)
+	if err != nil {
+		return booking, models.ErrBookingNotFound
+	}
+
+	// MITIGASI IDOR:
+	// Jika user aktif adalah customer, pastikan ID pembeli di DB cocok dengan CustomerID dari user tersebut
+	if role == "customer" {
+		customer, err := s.customerRepo.FindByUserID(uint(userID))
+		if err != nil || int(booking.CustomerID) != customer.ID {
+			// Mengembalikan 404 (ErrBookingNotFound) demi keamanan informasi
+			return models.Booking{}, models.ErrBookingNotFound
+		}
+	}
+
+	return booking, nil
 }
