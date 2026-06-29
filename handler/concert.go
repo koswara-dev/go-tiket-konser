@@ -73,13 +73,33 @@ func (h *ConcertHandler) CreateConcert(c *gin.Context) {
 
 // GetConcerts handles GET /api/v1/concerts
 func (h *ConcertHandler) GetConcerts(c *gin.Context) {
-	concerts, err := h.service.GetAllConcerts()
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve concerts: " + err.Error()})
+	var req dto.ConcertQueryRequest
+
+	if err := c.ShouldBindQuery(&req); err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{
+			Success: false,
+			Message: "Validasi parameter pencarian gagal",
+			Data:    err.Error(),
+		})
 		return
 	}
 
-	c.JSON(http.StatusOK, concerts)
+	concerts, meta, err := h.service.GetAllConcerts(req)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, dto.WebResponse{
+			Success: false,
+			Message: "Gagal mengambil data konser",
+			Data:    err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, dto.WebResponse{
+		Success: true,
+		Message: "Data berhasil diambil",
+		Data:    concerts,
+		Meta:    meta,
+	})
 }
 
 // GetConcertByID handles GET /api/v1/concerts/:id

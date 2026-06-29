@@ -9,6 +9,7 @@ import (
 type ConcertRepository interface {
 	Create(concert *models.Concert) error
 	FindAll() ([]models.Concert, error)
+	FindAllPaginated(search string, limit int, offset int, sort string) ([]models.Concert, int64, error)
 	FindByID(id int) (models.Concert, error)
 	Update(concert *models.Concert) error
 	Delete(id int) error
@@ -48,4 +49,35 @@ func (r *concertRepository) Delete(id int) error {
 		return err
 	}
 	return r.db.Delete(&concert).Error
+}
+
+func (r *concertRepository) FindAllPaginated(search string, limit int, offset int, sort string) ([]models.Concert, int64, error) {
+	var concerts []models.Concert
+	var total int64
+
+	query := r.db.Model(&models.Concert{})
+
+	if search != "" {
+		query = query.Where("title ILIKE ? OR venue ILIKE ?", "%"+search+"%", "%"+search+"%")
+	}
+
+	if err := query.Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
+	switch sort {
+	case "date_asc":
+		query = query.Order("date ASC")
+	case "date_desc":
+		query = query.Order("date DESC")
+	case "title_asc":
+		query = query.Order("title ASC")
+	case "title_desc":
+		query = query.Order("title DESC")
+	default:
+		query = query.Order("id DESC")
+	}
+
+	err := query.Limit(limit).Offset(offset).Find(&concerts).Error
+	return concerts, total, err
 }

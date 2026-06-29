@@ -20,3 +20,10 @@ type ConcertResponse struct {
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
+
+type ConcertQueryRequest struct {
+	Page   int    `form:"page" binding:"omitempty,numeric,gte=1"`
+	Limit  int    `form:"limit" binding:"omitempty,numeric,gte=1"`
+	Search string `form:"search"`
+	Sort   string `form:"sort" binding:"omitempty,oneof=date_asc date_desc title_asc title_desc"`
+}
