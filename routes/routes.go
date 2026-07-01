@@ -6,7 +6,11 @@ import (
 	"go-tiket-konser/repository"
 	"go-tiket-konser/service"
 
+	_ "go-tiket-konser/docs"
+
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/gorm"
 )
 
@@ -22,6 +26,9 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	// Global Middlewares
 	r.Use(middleware.ApiKeyAuth())
 	r.Use(middleware.RateLimiter(100))
+
+	// Swagger Route
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Initialize layers
 	concertRepo := repository.NewConcertRepository(db)

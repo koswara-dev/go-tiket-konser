@@ -28,6 +28,29 @@ func registerCustomValidators() {
 	}
 }
 
+// @title           Go Ticket Concert API
+// @version         1.0
+// @description     This is a ticket concert API server.
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name   API Support
+// @contact.url    http://www.swagger.io/support
+// @contact.email  support@swagger.io
+
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host      localhost:8080
+// @BasePath  /api/v1
+
+// @securityDefinitions.apiKey  ApiKeyAuth
+// @in                          header
+// @name                        x-api-key
+
+// @securityDefinitions.apiKey  BearerAuth
+// @in                          header
+// @name                        Authorization
+
 func main() {
 	// Initialize database, migrations, and seeding
 	config.InitDB()

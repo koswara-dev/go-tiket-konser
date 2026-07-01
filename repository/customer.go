@@ -9,7 +9,7 @@ import (
 type CustomerRepository interface {
 	FindByID(id int) (models.Customer, error)
 	FindByUserID(userID uint) (models.Customer, error)
-	GetAllCustomers() ([]models.Customer, error)
+	GetAllCustomers(search string, limit int, offset int, sort string) ([]models.Customer, int64, error)
 	UpdateCustomer(customer *models.Customer) error
 	DeleteCustomer(id int) error
 }
@@ -34,10 +34,35 @@ func (c *customerRepo) FindByUserID(userID uint) (models.Customer, error) {
 	return customer, err
 }
 
-func (c *customerRepo) GetAllCustomers() ([]models.Customer, error) {
+func (c *customerRepo) GetAllCustomers(search string, limit int, offset int, sort string) ([]models.Customer, int64, error) {
 	var customers []models.Customer
-	err := c.db.Find(&customers).Error
-	return customers, err
+	var total int64
+
+	query := c.db.Model(&models.Customer{})
+
+	if search != "" {
+		query = query.Where("name ILIKE ? OR email ILIKE ?", "%"+search+"%", "%"+search+"%")
+	}
+
+	if err := query.Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
+	switch sort {
+	case "name_asc":
+		query = query.Order("name ASC")
+	case "name_desc":
+		query = query.Order("name DESC")
+	case "email_asc":
+		query = query.Order("email ASC")
+	case "email_desc":
+		query = query.Order("email DESC")
+	default:
+		query = query.Order("id DESC")
+	}
+
+	err := query.Limit(limit).Offset(offset).Find(&customers).Error
+	return customers, total, err
 }
 
 func (c *customerRepo) UpdateCustomer(customer *models.Customer) error {

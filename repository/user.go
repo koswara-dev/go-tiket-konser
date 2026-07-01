@@ -10,7 +10,7 @@ type UserRepository interface {
 	CreateUser(user *models.User) error
 	GetUserByEmail(email string) (*models.User, error)
 	GetUserById(id uint) (*models.User, error)
-	GetAllUsers() ([]models.User, error)
+	GetAllUsers(search string, limit int, offset int, sort string) ([]models.User, int64, error)
 	UpdateUser(user *models.User) error
 	DeleteUser(id uint) error
 }
@@ -39,10 +39,35 @@ func (r *userRepository) GetUserById(id uint) (*models.User, error) {
 	return &user, err
 }
 
-func (r *userRepository) GetAllUsers() ([]models.User, error) {
+func (r *userRepository) GetAllUsers(search string, limit int, offset int, sort string) ([]models.User, int64, error) {
 	var users []models.User
-	err := r.db.Preload("Customer").Find(&users).Error
-	return users, err
+	var total int64
+
+	query := r.db.Model(&models.User{}).Preload("Customer")
+
+	if search != "" {
+		query = query.Where("full_name ILIKE ? OR email ILIKE ?", "%"+search+"%", "%"+search+"%")
+	}
+
+	if err := query.Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
+	switch sort {
+	case "full_name_asc":
+		query = query.Order("full_name ASC")
+	case "full_name_desc":
+		query = query.Order("full_name DESC")
+	case "email_asc":
+		query = query.Order("email ASC")
+	case "email_desc":
+		query = query.Order("email DESC")
+	default:
+		query = query.Order("id DESC")
+	}
+
+	err := query.Limit(limit).Offset(offset).Find(&users).Error
+	return users, total, err
 }
 
 func (r *userRepository) UpdateUser(user *models.User) error {

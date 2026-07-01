@@ -4,10 +4,11 @@ import (
 	"go-tiket-konser/dto"
 	"go-tiket-konser/models"
 	"go-tiket-konser/repository"
+	"math"
 )
 
 type CustomerService interface {
-	GetAllCustomers() ([]models.Customer, error)
+	GetAllCustomers(req dto.CustomerQueryRequest) ([]dto.CustomerResponse, dto.PaginationMeta, error)
 	GetCustomerByID(id int) (models.Customer, error)
 	UpdateCustomer(id int, req *dto.CustomerUpdateRequest) (models.Customer, error)
 	DeleteCustomer(id int) error
@@ -21,8 +22,52 @@ func NewCustomerService(customerRepo repository.CustomerRepository) CustomerServ
 	return &customerService{customerRepo: customerRepo}
 }
 
-func (s *customerService) GetAllCustomers() ([]models.Customer, error) {
-	return s.customerRepo.GetAllCustomers()
+func (s *customerService) GetAllCustomers(req dto.CustomerQueryRequest) ([]dto.CustomerResponse, dto.PaginationMeta, error) {
+	limit := req.Limit
+	if limit <= 0 {
+		limit = 10
+	}
+	if limit > 100 {
+		limit = 100
+	}
+
+	page := req.Page
+	if page <= 0 {
+		page = 1
+	}
+
+	offset := (page - 1) * limit
+
+	customers, totalData, err := s.customerRepo.GetAllCustomers(req.Search, limit, offset, req.Sort)
+	if err != nil {
+		return nil, dto.PaginationMeta{}, err
+	}
+
+	var responses []dto.CustomerResponse
+	for _, cust := range customers {
+		responses = append(responses, dto.CustomerResponse{
+			ID:        cust.ID,
+			UserID:    cust.UserID,
+			Name:      cust.Name,
+			Email:     cust.Email,
+			CreatedAt: cust.CreatedAt,
+			UpdatedAt: cust.UpdatedAt,
+		})
+	}
+
+	totalPage := 0
+	if totalData > 0 {
+		totalPage = int(math.Ceil(float64(totalData) / float64(limit)))
+	}
+
+	meta := dto.PaginationMeta{
+		Page:      page,
+		Limit:     limit,
+		TotalData: totalData,
+		TotalPage: totalPage,
+	}
+
+	return responses, meta, nil
 }
 
 func (s *customerService) GetCustomerByID(id int) (models.Customer, error) {

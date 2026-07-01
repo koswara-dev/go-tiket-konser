@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"net/http"
+	"strings"
 	"sync"
 
 	"github.com/gin-gonic/gin"
@@ -10,6 +11,10 @@ import (
 // ApiKeyAuth middleware untuk validasi x-api-key
 func ApiKeyAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		if strings.HasPrefix(c.Request.URL.Path, "/swagger") {
+			c.Next()
+			return
+		}
 		apiKey := c.GetHeader("x-api-key")
 		if apiKey != "juara-coding-super-secret" {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
