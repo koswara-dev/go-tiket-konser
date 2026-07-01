@@ -13,6 +13,12 @@ import (
 func SetupRouter(db *gorm.DB) *gin.Engine {
 	r := gin.Default()
 
+	// 1. inisiasi storage provider
+	storageProvider := service.NewLocalStorageProvider("uploads", "http://localhost:8080")
+
+	// 2. ekspose direktori upload
+	r.Static("/uploads", "./uploads")
+
 	// Global Middlewares
 	r.Use(middleware.ApiKeyAuth())
 	r.Use(middleware.RateLimiter(100))
@@ -20,7 +26,8 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	// Initialize layers
 	concertRepo := repository.NewConcertRepository(db)
 	concertService := service.NewConcertService(concertRepo)
-	concertHandler := handler.NewConcertHandler(concertService)
+
+	concertHandler := handler.NewConcertHandler(concertService, storageProvider)
 
 	ticketCategoryRepo := repository.NewTicketCategoryRepository(db)
 	ticketCategoryService := service.NewTicketCategoryService(ticketCategoryRepo, concertRepo)
@@ -58,6 +65,9 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 		api.POST("/concerts", middleware.JWTAuth(blacklistedTokenRepo), middleware.RequireRole("admin"), concertHandler.CreateConcert)
 		api.PUT("/concerts/:id", middleware.JWTAuth(blacklistedTokenRepo), middleware.RequireRole("admin"), concertHandler.UpdateConcert)
 		api.DELETE("/concerts/:id", middleware.JWTAuth(blacklistedTokenRepo), middleware.RequireRole("admin"), concertHandler.DeleteConcert)
+		// upload thumbnail dan rules konser
+		api.POST("/concerts/:id/thumbnail", middleware.JWTAuth(blacklistedTokenRepo), middleware.RequireRole("admin"), concertHandler.UploadTumbnail)
+		api.POST("/concerts/:id/rules", middleware.JWTAuth(blacklistedTokenRepo), middleware.RequireRole("admin"), concertHandler.UploadRulesPDF)
 
 		// Ticket Categories routes (Public GET, Admin for POST/PUT/DELETE)
 		api.GET("/ticket-categories", ticketCategoryHandler.GetTicketCategories)

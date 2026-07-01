@@ -3,7 +3,9 @@ package handler
 import (
 	"errors"
 	"net/http"
+	"path/filepath"
 	"strconv"
+	"strings"
 	"time"
 
 	"go-tiket-konser/dto"
@@ -15,11 +17,121 @@ import (
 )
 
 type ConcertHandler struct {
-	service service.ConcertService
+	service         service.ConcertService
+	storageProvider service.StorageProvider
 }
 
-func NewConcertHandler(service service.ConcertService) *ConcertHandler {
-	return &ConcertHandler{service: service}
+func NewConcertHandler(s service.ConcertService, sp service.StorageProvider) *ConcertHandler {
+	return &ConcertHandler{service: s, storageProvider: sp}
+}
+
+// UploadTumbnail handles POST /api/v1/concerts/:id/thumbnail
+func (h *ConcertHandler) UploadTumbnail(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{
+			Success: false,
+			Message: "Invalid ID format",
+		})
+		return
+	}
+
+	// 1. ambil file thumnail dari form request
+	file, err := c.FormFile("thumbnail")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{
+			Success: false,
+			Message: "Failed to get thumbnail file",
+		})
+		return
+	}
+
+	// 2. simpan file menggunakan StorageProvider
+	fileUrl, err := h.storageProvider.UploadFile(file, c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{
+			Success: false,
+			Message: "Failed to upload thumbnail",
+		})
+		return
+	}
+
+	// 3. Update field ThumbnailURL di database
+	concert, err := h.service.GetConcertByID(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{
+			Success: false,
+			Message: "Failed to get concert",
+		})
+		return
+	}
+
+	concert.ThumbnailURL = fileUrl
+	if err := h.service.UpdateConcert(&concert); err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{
+			Success: false,
+			Message: "Failed to update thumbnail",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, dto.WebResponse{
+		Success: true,
+		Message: "Thumbnail uploaded successfully",
+		Data:    fileUrl,
+	})
+}
+
+// UploadRulesPDF handles POST /api/v1/concerts/:id/rules
+func (h *ConcertHandler) UploadRulesPDF(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{Success: false, Message: "ID Konser tidak valid"})
+		return
+	}
+
+	// 1. Ambil berkas PDF dari request form dengan key name "rules_pdf"
+	file, err := c.FormFile("rules_pdf")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{Success: false, Message: "Berkas PDF tata tertib wajib dikirim"})
+		return
+	}
+
+	// 2. Validasi Ekstensi Berkas (Khusus PDF tata tertib)
+	ext := strings.ToLower(filepath.Ext(file.Filename))
+	if ext != ".pdf" {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{Success: false, Message: "Format berkas tidak didukung: hanya diperbolehkan PDF (.pdf)"})
+		return
+	}
+
+	// 3. Simpan berkas PDF menggunakan StorageProvider (Local/Cloud)
+	fileURL, err := h.storageProvider.UploadFile(file, c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{Success: false, Message: err.Error()})
+		return
+	}
+
+	// 4. Perbarui field RulesPDFURL di database konser
+	concert, err := h.service.GetConcertByID(id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, dto.WebResponse{Success: false, Message: "Konser tidak ditemukan"})
+		return
+	}
+
+	concert.RulesPDFURL = fileURL
+	err = h.service.UpdateConcert(&concert)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, dto.WebResponse{Success: false, Message: "Gagal menyimpan berkas PDF tata tertib"})
+		return
+	}
+
+	c.JSON(http.StatusOK, dto.WebResponse{
+		Success: true,
+		Message: "PDF Tata tertib konser berhasil diunggah dan disimpan",
+		Data:    fileURL,
+	})
 }
 
 // CreateConcert handles POST /api/v1/concerts
