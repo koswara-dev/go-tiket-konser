@@ -221,3 +221,41 @@ func (h *AuthHandler) GetProfile(c *gin.Context) {
 		},
 	})
 }
+
+// VerifyOTP godoc
+// @Summary      Verify registration OTP
+// @Description  Verify the 6-digit OTP code sent to user's email during registration
+// @Tags         auth
+// @Accept       json
+// @Produce      json
+// @Param        request  body      dto.VerifyOTPRequest  true  "Verify OTP Payload"
+// @Success      200      {object}  dto.WebResponse{}
+// @Failure      400      {object}  dto.WebResponse{data=string}
+// @Security     ApiKeyAuth
+// @Router       /verify-otp [post]
+func (h *AuthHandler) VerifyOTP(c *gin.Context) {
+	var req dto.VerifyOTPRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{
+			Success: false,
+			Message: "Validasi input gagal",
+			Data:    err.Error(),
+		})
+		return
+	}
+
+	err := h.authService.VerifyOTP(req.Email, req.OTP)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.WebResponse{
+			Success: false,
+			Message: "Verifikasi OTP gagal",
+			Data:    err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, dto.WebResponse{
+		Success: true,
+		Message: "Verifikasi OTP berhasil, silakan login",
+	})
+}

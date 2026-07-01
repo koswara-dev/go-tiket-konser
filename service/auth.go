@@ -1,9 +1,12 @@
 package service
 
 import (
+	"crypto/rand"
 	"errors"
+	"fmt"
 	"go-tiket-konser/models"
 	"go-tiket-konser/repository"
+	"math/big"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -25,16 +28,31 @@ type AuthService interface {
 	Login(email, password string) (string, error)
 	Logout(tokenString string) error
 	GetProfile(id uint) (*models.User, error)
+	VerifyOTP(email, otp string) error
 }
 
 type authService struct {
 	userRepo      repository.UserRepository
 	blacklistRepo repository.BlacklistedTokenRepository
+	emailService  EmailService
 }
 
 // New Auth Service
-func NewAuthService(userRepo repository.UserRepository, blacklistRepo repository.BlacklistedTokenRepository) *authService {
-	return &authService{userRepo: userRepo, blacklistRepo: blacklistRepo}
+func NewAuthService(
+	userRepo repository.UserRepository,
+	blacklistRepo repository.BlacklistedTokenRepository,
+	emailService EmailService,
+) *authService {
+	return &authService{
+		userRepo:      userRepo,
+		blacklistRepo: blacklistRepo,
+		emailService:  emailService,
+	}
+}
+
+func generateOTP() string {
+	n, _ := rand.Int(rand.Reader, big.NewInt(900000))
+	return fmt.Sprintf("%06d", n.Int64()+100000)
 }
 
 // Register
@@ -61,13 +79,20 @@ func (s *authService) Register(email, password, fullName string) (*models.User, 
 		}
 	}
 
+	// Generate OTP
+	otpCode := generateOTP()
+	otpExpiredAt := time.Now().Add(5 * time.Minute)
+
 	// Create the new user
 	user := models.User{
-		Email:    email,
-		Password: string(hashedPassword),
-		FullName: fullName,
-		Role:     role,
-		Customer: customer,
+		Email:        email,
+		Password:     string(hashedPassword),
+		FullName:     fullName,
+		Role:         role,
+		Customer:     customer,
+		OtpCode:      otpCode,
+		OtpExpiredAt: otpExpiredAt,
+		IsVerified:   false,
 	}
 
 	// Save the user to the database
@@ -75,6 +100,11 @@ func (s *authService) Register(email, password, fullName string) (*models.User, 
 	if err != nil {
 		return nil, err
 	}
+
+	go func() {
+		_ = s.emailService.SendOTP(email, otpCode)
+	}()
+
 	return &user, nil
 }
 
@@ -121,6 +151,27 @@ func (s *authService) GetProfile(id uint) (*models.User, error) {
 	return s.userRepo.GetUserById(id)
 }
 
-// email verification
+func (s *authService) VerifyOTP(email, otp string) error {
+	user, err := s.userRepo.GetUserByEmail(email)
+	if err != nil {
+		return errors.New("user tidak ditemukan")
+	}
 
-// change password
+	if user.IsVerified {
+		return errors.New("user sudah terverifikasi")
+	}
+
+	if user.OtpCode != otp {
+		return errors.New("kode OTP salah")
+	}
+
+	if time.Now().After(user.OtpExpiredAt) {
+		return errors.New("kode OTP sudah kedaluwarsa")
+	}
+
+	user.IsVerified = true
+	user.OtpCode = ""
+	user.OtpExpiredAt = time.Time{}
+
+	return s.userRepo.UpdateUser(user)
+}

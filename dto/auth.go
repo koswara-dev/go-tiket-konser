@@ -18,3 +18,8 @@ type UserResponse struct {
 	Role       string `json:"role"`
 	CustomerID uint   `json:"customer_id,omitempty"`
 }
+
+type VerifyOTPRequest struct {
+	Email string `json:"email" binding:"required,email"`
+	OTP   string `json:"otp" binding:"required"`
+}

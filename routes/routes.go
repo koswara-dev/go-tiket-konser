@@ -49,7 +49,8 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	// inisialisasi layer authentication
 	userRepo := repository.NewUserRepository(db)
 	blacklistedTokenRepo := repository.NewBlacklistedTokenRepository(db)
-	authService := service.NewAuthService(userRepo, blacklistedTokenRepo)
+	emailService := service.NewEmailService()
+	authService := service.NewAuthService(userRepo, blacklistedTokenRepo, emailService)
 	authHandler := handler.NewAuthHandler(authService)
 
 	// Inisialisasi layer Users & Customers
@@ -65,6 +66,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 		// Auth routes
 		api.POST("/register", authHandler.Register)
 		api.POST("/login", authHandler.Login)
+		api.POST("/verify-otp", authHandler.VerifyOTP)
 
 		// Concerts routes (Public GET, Admin for POST/PUT/DELETE)
 		api.GET("/concerts", concertHandler.GetConcerts)

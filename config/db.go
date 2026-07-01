@@ -1,11 +1,14 @@
 package config
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"go-tiket-konser/models"
 
+	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -15,7 +18,17 @@ var DB *gorm.DB
 
 func InitDB() {
 	var err error
-	dsn := "postgres://postgres:secret45@localhost:5434/eticketdb?sslmode=disable"
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, using system environment variables")
+	}
+
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Jakarta",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASS"),
+		os.Getenv("DB_NAME"),
+		os.Getenv("DB_PORT"),
+	)
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("failed to connect database: ", err)
@@ -138,10 +151,11 @@ func InitDB() {
 			log.Println("failed to hash admin password: ", err)
 		} else {
 			adminUser := models.User{
-				FullName: "Admin Konser",
-				Email:    "adminkonser@gmail.com",
-				Password: string(hashedPassword),
-				Role:     "admin",
+				FullName:   "Admin Konser",
+				Email:      "adminkonser@gmail.com",
+				Password:   string(hashedPassword),
+				Role:       "admin",
+				IsVerified: true,
 			}
 			if err := DB.Create(&adminUser).Error; err != nil {
 				log.Println("failed to seed admin user: ", err)

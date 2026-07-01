@@ -133,6 +133,16 @@ definitions:
     - full_name
     - role
     type: object
+  dto.VerifyOTPRequest:
+    properties:
+      email:
+        type: string
+      otp:
+        type: string
+    required:
+    - email
+    - otp
+    type: object
   dto.WebResponse:
     properties:
       data: {}
@@ -1125,6 +1135,39 @@ paths:
       summary: Update user
       tags:
       - users
+  /verify-otp:
+    post:
+      consumes:
+      - application/json
+      description: Verify the 6-digit OTP code sent to user's email during registration
+      parameters:
+      - description: Verify OTP Payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.VerifyOTPRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.WebResponse'
+        "400":
+          description: Bad Request
+          schema:
+            allOf:
+            - $ref: '#/definitions/dto.WebResponse'
+            - properties:
+                data:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Verify registration OTP
+      tags:
+      - auth
 securityDefinitions:
   ApiKeyAuth:
     in: header
