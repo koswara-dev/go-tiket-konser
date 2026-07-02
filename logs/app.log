@@ -1,0 +1,9 @@
+{"level":"info","msg":"Server is starting...","time":"2026-07-02 21:01:53"}
+{"level":"info","msg":"Server is running on port :8080","time":"2026-07-02 21:01:53"}
+{"action":"auth_login_failed","client_ip":"::1","email":"bayu@gmail.com","level":"warning","msg":"Percobaan login gagal: email tidak terdaftar","time":"2026-07-02 21:04:25"}
+{"client_ip":"::1","latency_ms":84,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/login","status":401,"time":"2026-07-02 21:04:25"}
+{"action":"auth_login_success","client_ip":"::1","email":"bayu@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-02 21:08:06"}
+{"client_ip":"::1","latency_ms":73,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-02 21:08:06"}
+{"client_ip":"::1","latency_ms":10,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/profile","status":200,"time":"2026-07-02 21:09:08"}
+{"action":"concert_list_retrieved","client_ip":"::1","level":"info","msg":"Daftar konser berhasil diambil","query":{"Page":0,"Limit":0,"Search":"","Sort":""},"time":"2026-07-02 21:11:34"}
+{"client_ip":"::1","latency_ms":11,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/concerts","status":200,"time":"2026-07-02 21:11:34"}

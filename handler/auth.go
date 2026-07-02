@@ -3,9 +3,11 @@ package handler
 import (
 	"go-tiket-konser/dto"
 	"go-tiket-konser/service"
+	"go-tiket-konser/utils/logger"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 type AuthHandler struct {
@@ -77,6 +79,12 @@ func (h *AuthHandler) Register(c *gin.Context) {
 			CustomerID: customerID,
 		},
 	})
+
+	logger.Log.WithFields(logrus.Fields{
+		"email":     user.Email,
+		"client_ip": c.ClientIP(),
+		"action":    "auth_register_success",
+	}).Info("User baru berhasil terdaftar")
 }
 
 // Login godoc
@@ -108,9 +116,14 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		statusCode, errMsg := mapAuthError(err)
 		c.JSON(statusCode, dto.WebResponse{
 			Success: false,
-			Message: "Login gagal",
+			Message: "Invalid Email or password",
 			Data:    errMsg,
 		})
+		logger.Log.WithFields(logrus.Fields{
+			"email":     req.Email,
+			"client_ip": c.ClientIP(),
+			"action":    "auth_login_failed",
+		}).Warn("Percobaan login gagal: email tidak terdaftar")
 		return
 	}
 
@@ -121,6 +134,13 @@ func (h *AuthHandler) Login(c *gin.Context) {
 			"token": token,
 		},
 	})
+
+	logger.Log.WithFields(logrus.Fields{
+		"email":     req.Email,
+		"client_ip": c.ClientIP(),
+		"action":    "auth_login_success",
+	}).Info("User berhasil login")
+
 }
 
 // Logout godoc
@@ -258,4 +278,10 @@ func (h *AuthHandler) VerifyOTP(c *gin.Context) {
 		Success: true,
 		Message: "Verifikasi OTP berhasil, silakan login",
 	})
+
+	logger.Log.WithFields(logrus.Fields{
+		"email":     req.Email,
+		"client_ip": c.ClientIP(),
+		"action":    "auth_otp_verified",
+	}).Info("Kode OTP sukses diverifikasi, token JWT berhasil diterbitkan")
 }

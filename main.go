@@ -3,7 +3,7 @@ package main
 import (
 	"go-tiket-konser/config"
 	"go-tiket-konser/routes"
-	"log"
+	"go-tiket-konser/utils/logger"
 	"time"
 
 	"github.com/gin-gonic/gin/binding"
@@ -52,6 +52,11 @@ func registerCustomValidators() {
 // @name                        Authorization
 
 func main() {
+
+	// Initialize logger
+	logger.InitLogger()
+	logger.Log.Info("Server is starting...")
+
 	// Initialize database, migrations, and seeding
 	config.InitDB()
 
@@ -60,8 +65,8 @@ func main() {
 	// Setup routes and inject database connection
 	r := routes.SetupRouter(config.DB)
 
-	log.Println("Server is running on port :8080")
+	logger.Log.Info("Server is running on port :8080")
 	if err := r.Run(":8080"); err != nil {
-		log.Fatal("Failed to start server: ", err)
+		logger.Log.Fatal("Failed to start server: ", err)
 	}
 }

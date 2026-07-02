@@ -11,8 +11,10 @@ import (
 	"go-tiket-konser/dto"
 	"go-tiket-konser/models"
 	"go-tiket-konser/service"
+	"go-tiket-konser/utils/logger"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )
 
@@ -222,6 +224,12 @@ func (h *ConcertHandler) CreateConcert(c *gin.Context) {
 			UpdatedAt:   concert.UpdatedAt,
 		},
 	})
+
+	logger.Log.WithFields(logrus.Fields{
+		"concert_id": concert.ID,
+		"client_ip":  c.ClientIP(),
+		"action":     "concert_created",
+	}).Info("Konser baru berhasil ditambahkan")
 }
 
 // GetConcerts handles GET /api/v1/concerts
@@ -265,6 +273,12 @@ func (h *ConcertHandler) GetConcerts(c *gin.Context) {
 		Data:    concerts,
 		Meta:    meta,
 	})
+
+	logger.Log.WithFields(logrus.Fields{
+		"query":     req,
+		"client_ip": c.ClientIP(),
+		"action":    "concert_list_retrieved",
+	}).Info("Daftar konser berhasil diambil")
 }
 
 // GetConcertByID handles GET /api/v1/concerts/:id

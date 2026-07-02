@@ -15,7 +15,10 @@ import (
 )
 
 func SetupRouter(db *gorm.DB) *gin.Engine {
-	r := gin.Default()
+	r := gin.New()
+
+	r.Use(gin.Recovery())
+	r.Use(middleware.LoggerMiddleware())
 
 	// 1. inisiasi storage provider
 	storageProvider := service.NewLocalStorageProvider("uploads", "http://localhost:8080")
