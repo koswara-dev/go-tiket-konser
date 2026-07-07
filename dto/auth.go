@@ -1,5 +1,7 @@
 package dto
 
+import "github.com/google/uuid"
+
 type RegisterRequest struct {
 	FullName string `json:"full_name" binding:"required"`
 	Email    string `json:"email" binding:"required,email"`
@@ -12,11 +14,11 @@ type LoginRequest struct {
 }
 
 type UserResponse struct {
-	ID         uint   `json:"id"`
-	FullName   string `json:"full_name"`
-	Email      string `json:"email"`
-	Role       string `json:"role"`
-	CustomerID uint   `json:"customer_id,omitempty"`
+	ID         uuid.UUID `json:"id"`
+	FullName   string    `json:"full_name"`
+	Email      string    `json:"email"`
+	Role       string    `json:"role"`
+	CustomerID uuid.UUID `json:"customer_id,omitempty"`
 }
 
 type VerifyOTPRequest struct {

@@ -2,12 +2,12 @@ package handler
 
 import (
 	"net/http"
-	"strconv"
 
 	"go-tiket-konser/dto"
 	"go-tiket-konser/service"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 type BookingHandler struct {
@@ -29,7 +29,14 @@ func (h *BookingHandler) CreateBooking(c *gin.Context) {
 		return
 	}
 
-	booking, err := h.service.CreateBooking(&req)
+	userIDVal, exists := c.Get("user_id")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"success": false, "message": "Akses tidak sah"})
+		return
+	}
+	userID := userIDVal.(uuid.UUID)
+
+	booking, err := h.service.CreateBooking(&req, userID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"success": false,
@@ -48,7 +55,7 @@ func (h *BookingHandler) CreateBooking(c *gin.Context) {
 
 func (h *BookingHandler) GetBookingByID(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	id, err := uuid.Parse(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "ID booking tidak valid"})
 		return
@@ -60,7 +67,7 @@ func (h *BookingHandler) GetBookingByID(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Akses tidak sah"})
 		return
 	}
-	userID, ok := userIDVal.(uint)
+	userID, ok := userIDVal.(uuid.UUID)
 	if !ok {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Tipe data user ID tidak valid"})
 		return
@@ -68,7 +75,7 @@ func (h *BookingHandler) GetBookingByID(c *gin.Context) {
 	role := c.MustGet("role").(string)
 
 	// 2. kirim parameter audit keamanan layer service
-	booking, err := h.service.GetBookingByID(id, int(userID), role)
+	booking, err := h.service.GetBookingByID(id, userID, role)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"success": false,

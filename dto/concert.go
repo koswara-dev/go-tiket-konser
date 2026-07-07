@@ -1,6 +1,10 @@
 package dto
 
-import "time"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type ConcertRequest struct {
 	Title       string `json:"title" binding:"required,min=5,max=150"`
@@ -11,14 +15,17 @@ type ConcertRequest struct {
 }
 
 type ConcertResponse struct {
-	ID          int       `json:"id"`
-	Title       string    `json:"title"`
-	Description string    `json:"description"`
-	Date        string    `json:"date"`
-	Venue       string    `json:"venue"`
-	Status      string    `json:"status"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	ID           uuid.UUID `json:"id"`
+	Title        string    `json:"title"`
+	Description  string    `json:"description"`
+	Date         string    `json:"date"`
+	Venue        string    `json:"venue"`
+	Status       string    `json:"status"`
+	PosterURL    string    `json:"poster_url"`
+	ThumbnailURL string    `json:"thumbnail_url"`
+	RulesPDFURL  string    `json:"rules_pdf_url"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
 }
 
 type ConcertQueryRequest struct {

@@ -7,12 +7,14 @@ import (
 	"testing"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 func TestCreateConcert_Success(t *testing.T) {
 	mockRepo := new(MockConcertRepository)
-	serv := NewConcertService(mockRepo)
+	serv := NewConcertService(mockRepo, nil)
 
 	now := time.Now().AddDate(0, 0, 10)
 	inputConcert := &models.Concert{
@@ -35,15 +37,22 @@ func TestCreateConcert_Success(t *testing.T) {
 
 func TestCreateConcert_DuplicateTitle(t *testing.T) {
 	mockRepo := new(MockConcertRepository)
-	serv := NewConcertService(mockRepo)
+	serv := NewConcertService(mockRepo, nil)
 
 	now := time.Now().AddDate(0, 0, 10)
 	inputConcert := &models.Concert{
 		Title: "Konser A",
 	}
 
+	id1 := uuid.New()
 	existingConcerts := []models.Concert{
-		{ID: 1, Title: "Konser A", Date: now},
+		{
+			BaseModel: models.BaseModel{
+				ID: id1,
+			},
+			Title: "Konser A",
+			Date:  now,
+		},
 	}
 
 	mockRepo.On("FindAll").Return(existingConcerts, nil)
@@ -57,7 +66,7 @@ func TestCreateConcert_DuplicateTitle(t *testing.T) {
 
 func TestGetAllConcerts_Success(t *testing.T) {
 	mockRepo := new(MockConcertRepository)
-	serv := NewConcertService(mockRepo)
+	serv := NewConcertService(mockRepo, nil)
 
 	req := dto.ConcertQueryRequest{
 		Page:   1,
@@ -67,9 +76,12 @@ func TestGetAllConcerts_Success(t *testing.T) {
 	}
 
 	now := time.Now()
+	id1 := uuid.New()
 	concerts := []models.Concert{
 		{
-			ID:          1,
+			BaseModel: models.BaseModel{
+				ID: id1,
+			},
 			Title:       "Konser A",
 			Description: "Deskripsi A",
 			Date:        now,
@@ -94,16 +106,19 @@ func TestGetAllConcerts_Success(t *testing.T) {
 
 func TestGetConcertByID_Success(t *testing.T) {
 	mockRepo := new(MockConcertRepository)
-	serv := NewConcertService(mockRepo)
+	serv := NewConcertService(mockRepo, nil)
 
+	id1 := uuid.New()
 	dummyConcert := models.Concert{
-		ID:    1,
+		BaseModel: models.BaseModel{
+			ID: id1,
+		},
 		Title: "Konser A",
 	}
 
-	mockRepo.On("FindByID", 1).Return(dummyConcert, nil)
+	mockRepo.On("FindByID", id1).Return(dummyConcert, nil)
 
-	concert, err := serv.GetConcertByID(1)
+	concert, err := serv.GetConcertByID(id1)
 
 	assert.NoError(t, err)
 	assert.Equal(t, "Konser A", concert.Title)
@@ -112,11 +127,12 @@ func TestGetConcertByID_Success(t *testing.T) {
 
 func TestGetConcertByID_NotFound(t *testing.T) {
 	mockRepo := new(MockConcertRepository)
-	serv := NewConcertService(mockRepo)
+	serv := NewConcertService(mockRepo, nil)
 
-	mockRepo.On("FindByID", 99).Return(models.Concert{}, errors.New("not found"))
+	idErr := uuid.New()
+	mockRepo.On("FindByID", idErr).Return(models.Concert{}, errors.New("not found"))
 
-	_, err := serv.GetConcertByID(99)
+	_, err := serv.GetConcertByID(idErr)
 
 	assert.Error(t, err)
 	assert.True(t, errors.Is(err, models.ErrConcertNotFound))
@@ -125,14 +141,17 @@ func TestGetConcertByID_NotFound(t *testing.T) {
 
 func TestUpdateConcert_Success(t *testing.T) {
 	mockRepo := new(MockConcertRepository)
-	serv := NewConcertService(mockRepo)
+	serv := NewConcertService(mockRepo, nil)
 
+	id1 := uuid.New()
 	dummyConcert := models.Concert{
-		ID:    1,
+		BaseModel: models.BaseModel{
+			ID: id1,
+		},
 		Title: "Konser A",
 	}
 
-	mockRepo.On("FindByID", 1).Return(dummyConcert, nil)
+	mockRepo.On("FindByID", id1).Return(dummyConcert, nil)
 	mockRepo.On("Update", &dummyConcert).Return(nil)
 
 	err := serv.UpdateConcert(&dummyConcert)
@@ -143,13 +162,16 @@ func TestUpdateConcert_Success(t *testing.T) {
 
 func TestUpdateConcert_NotFound(t *testing.T) {
 	mockRepo := new(MockConcertRepository)
-	serv := NewConcertService(mockRepo)
+	serv := NewConcertService(mockRepo, nil)
 
+	idErr := uuid.New()
 	inputConcert := &models.Concert{
-		ID: 99,
+		BaseModel: models.BaseModel{
+			ID: idErr,
+		},
 	}
 
-	mockRepo.On("FindByID", 99).Return(models.Concert{}, errors.New("not found"))
+	mockRepo.On("FindByID", idErr).Return(models.Concert{}, errors.New("not found"))
 
 	err := serv.UpdateConcert(inputConcert)
 
@@ -160,16 +182,21 @@ func TestUpdateConcert_NotFound(t *testing.T) {
 
 func TestDeleteConcert_Success(t *testing.T) {
 	mockRepo := new(MockConcertRepository)
-	serv := NewConcertService(mockRepo)
+	serv := NewConcertService(mockRepo, nil)
 
+	id1 := uuid.New()
 	dummyConcert := models.Concert{
-		ID: 1,
+		BaseModel: models.BaseModel{
+			ID: id1,
+		},
 	}
 
-	mockRepo.On("FindByID", 1).Return(dummyConcert, nil)
-	mockRepo.On("Delete", 1).Return(nil)
+	mockRepo.On("FindByID", id1).Return(dummyConcert, nil)
+	mockRepo.On("Update", mock.Anything).Return(nil)
+	mockRepo.On("Delete", id1).Return(nil)
 
-	err := serv.DeleteConcert(1)
+	userID := uuid.New()
+	err := serv.DeleteConcert(id1, userID)
 
 	assert.NoError(t, err)
 	mockRepo.AssertExpectations(t)
@@ -177,11 +204,13 @@ func TestDeleteConcert_Success(t *testing.T) {
 
 func TestDeleteConcert_NotFound(t *testing.T) {
 	mockRepo := new(MockConcertRepository)
-	serv := NewConcertService(mockRepo)
+	serv := NewConcertService(mockRepo, nil)
 
-	mockRepo.On("FindByID", 99).Return(models.Concert{}, errors.New("not found"))
+	idErr := uuid.New()
+	mockRepo.On("FindByID", idErr).Return(models.Concert{}, errors.New("not found"))
 
-	err := serv.DeleteConcert(99)
+	userID := uuid.New()
+	err := serv.DeleteConcert(idErr, userID)
 
 	assert.Error(t, err)
 	assert.True(t, errors.Is(err, models.ErrConcertNotFound))

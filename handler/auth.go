@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 )
 
@@ -63,9 +64,9 @@ func (h *AuthHandler) Register(c *gin.Context) {
 		return
 	}
 
-	var customerID uint
+	var customerID uuid.UUID
 	if user.Customer != nil {
-		customerID = uint(user.Customer.ID)
+		customerID = user.Customer.ID
 	}
 
 	c.JSON(http.StatusCreated, dto.WebResponse{
@@ -212,7 +213,7 @@ func (h *AuthHandler) GetProfile(c *gin.Context) {
 		})
 		return
 	}
-	userID := userIDVal.(uint)
+	userID := userIDVal.(uuid.UUID)
 
 	user, err := h.authService.GetProfile(userID)
 	if err != nil {
@@ -224,9 +225,9 @@ func (h *AuthHandler) GetProfile(c *gin.Context) {
 		return
 	}
 
-	var customerID uint
+	var customerID uuid.UUID
 	if user.Customer != nil {
-		customerID = uint(user.Customer.ID)
+		customerID = user.Customer.ID
 	}
 
 	c.JSON(http.StatusOK, dto.WebResponse{

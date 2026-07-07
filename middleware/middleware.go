@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 
@@ -38,6 +39,10 @@ var limiter = IPRateLimiter{
 // RateLimiter limit request per user
 func RateLimiter(maxRequest int) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		if os.Getenv("APP_ENV") != "production" {
+			c.Next()
+			return
+		}
 		clientIP := c.ClientIP()
 
 		limiter.mu.Lock()

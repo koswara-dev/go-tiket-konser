@@ -3,15 +3,16 @@ package repository
 import (
 	"go-tiket-konser/models"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type TicketCategoryRepository interface {
 	Create(category *models.TicketCategory) error
 	FindAll() ([]models.TicketCategory, error)
-	FindByID(id int) (models.TicketCategory, error)
+	FindByID(id uuid.UUID) (models.TicketCategory, error)
 	Update(category *models.TicketCategory) error
-	Delete(id int) error
+	Delete(id uuid.UUID) error
 }
 
 type ticketCategoryRepository struct {
@@ -32,7 +33,7 @@ func (r *ticketCategoryRepository) FindAll() ([]models.TicketCategory, error) {
 	return categories, err
 }
 
-func (r *ticketCategoryRepository) FindByID(id int) (models.TicketCategory, error) {
+func (r *ticketCategoryRepository) FindByID(id uuid.UUID) (models.TicketCategory, error) {
 	var category models.TicketCategory
 	err := r.db.Preload("Concert").First(&category, id).Error
 	return category, err
@@ -42,7 +43,7 @@ func (r *ticketCategoryRepository) Update(category *models.TicketCategory) error
 	return r.db.Save(category).Error
 }
 
-func (r *ticketCategoryRepository) Delete(id int) error {
+func (r *ticketCategoryRepository) Delete(id uuid.UUID) error {
 	var category models.TicketCategory
 	if err := r.db.First(&category, id).Error; err != nil {
 		return err

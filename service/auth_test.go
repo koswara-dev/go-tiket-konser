@@ -5,9 +5,9 @@ import (
 	"go-tiket-konser/models"
 	"testing"
 
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/crypto/bcrypt"
-	"gorm.io/gorm"
 )
 
 func TestLogin_Success(t *testing.T) {
@@ -23,7 +23,7 @@ func TestLogin_Success(t *testing.T) {
 	assert.NoError(t, err)
 
 	dummyUser := &models.User{
-		Model:      gorm.Model{ID: 1},
+		BaseModel: models.BaseModel{ID: uuid.New()},
 		Email:      email,
 		Password:   string(hashedPassword),
 		Role:       "customer",
@@ -72,7 +72,7 @@ func TestLogin_InvalidPassword(t *testing.T) {
 	assert.NoError(t, err)
 
 	dummyUser := &models.User{
-		Model:      gorm.Model{ID: 1},
+		BaseModel: models.BaseModel{ID: uuid.New()},
 		Email:      email,
 		Password:   string(hashedPassword),
 		Role:       "customer",

@@ -3,15 +3,16 @@ package repository
 import (
 	"go-tiket-konser/models"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type CustomerRepository interface {
-	FindByID(id int) (models.Customer, error)
-	FindByUserID(userID uint) (models.Customer, error)
+	FindByID(id uuid.UUID) (models.Customer, error)
+	FindByUserID(userID uuid.UUID) (models.Customer, error)
 	GetAllCustomers(search string, limit int, offset int, sort string) ([]models.Customer, int64, error)
 	UpdateCustomer(customer *models.Customer) error
-	DeleteCustomer(id int) error
+	DeleteCustomer(id uuid.UUID) error
 }
 
 type customerRepo struct {
@@ -22,13 +23,13 @@ func NewCustomerRepository(db *gorm.DB) CustomerRepository {
 	return &customerRepo{db: db}
 }
 
-func (c *customerRepo) FindByID(id int) (models.Customer, error) {
+func (c *customerRepo) FindByID(id uuid.UUID) (models.Customer, error) {
 	var customer models.Customer
 	err := c.db.Where("id = ?", id).First(&customer).Error
 	return customer, err
 }
 
-func (c *customerRepo) FindByUserID(userID uint) (models.Customer, error) {
+func (c *customerRepo) FindByUserID(userID uuid.UUID) (models.Customer, error) {
 	var customer models.Customer
 	err := c.db.Where("user_id = ?", userID).First(&customer).Error
 	return customer, err
@@ -69,7 +70,7 @@ func (c *customerRepo) UpdateCustomer(customer *models.Customer) error {
 	return c.db.Save(customer).Error
 }
 
-func (c *customerRepo) DeleteCustomer(id int) error {
+func (c *customerRepo) DeleteCustomer(id uuid.UUID) error {
 	var customer models.Customer
 	if err := c.db.First(&customer, id).Error; err != nil {
 		return err

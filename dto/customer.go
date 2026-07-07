@@ -1,6 +1,10 @@
 package dto
 
-import "time"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type CustomerUpdateRequest struct {
 	Name  string `json:"name" binding:"required"`
@@ -8,8 +12,8 @@ type CustomerUpdateRequest struct {
 }
 
 type CustomerResponse struct {
-	ID        int       `json:"id"`
-	UserID    uint      `json:"user_id,omitempty"`
+	ID        uuid.UUID `json:"id"`
+	UserID    uuid.UUID `json:"user_id,omitempty"`
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	CreatedAt time.Time `json:"created_at"`
@@ -22,4 +26,3 @@ type CustomerQueryRequest struct {
 	Search string `form:"search"`
 	Sort   string `form:"sort" binding:"omitempty,oneof=name_asc name_desc email_asc email_desc"`
 }
-

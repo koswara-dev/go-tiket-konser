@@ -6,6 +6,7 @@ import (
 	"mime/multipart"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -32,7 +33,7 @@ func (m *MockAuthService) Logout(tokenString string) error {
 	return args.Error(0)
 }
 
-func (m *MockAuthService) GetProfile(id uint) (*models.User, error) {
+func (m *MockAuthService) GetProfile(id uuid.UUID) (*models.User, error) {
 	args := m.Called(id)
 	if args.Get(0) == nil {
 		return nil, args.Error(1)
@@ -64,7 +65,7 @@ func (m *MockConcertService) GetAllConcerts(req dto.ConcertQueryRequest) ([]dto.
 	return concerts, args.Get(1).(dto.PaginationMeta), args.Error(2)
 }
 
-func (m *MockConcertService) GetConcertByID(id int) (models.Concert, error) {
+func (m *MockConcertService) GetConcertByID(id uuid.UUID) (models.Concert, error) {
 	args := m.Called(id)
 	return args.Get(0).(models.Concert), args.Error(1)
 }
@@ -74,8 +75,8 @@ func (m *MockConcertService) UpdateConcert(concert *models.Concert) error {
 	return args.Error(0)
 }
 
-func (m *MockConcertService) DeleteConcert(id int) error {
-	args := m.Called(id)
+func (m *MockConcertService) DeleteConcert(id uuid.UUID, deleterID uuid.UUID) error {
+	args := m.Called(id, deleterID)
 	return args.Error(0)
 }
 

@@ -3,7 +3,7 @@ package models
 import "time"
 
 type Concert struct {
-	ID           int       `gorm:"primaryKey;autoIncrement" json:"id"`
+	BaseModel
 	Title        string    `gorm:"not null" json:"title" binding:"required"`
 	Description  string    `gorm:"type:text" json:"description"`
 	Date         time.Time `gorm:"not null" json:"date" binding:"required"`
@@ -12,7 +12,4 @@ type Concert struct {
 	PosterURL    string    `gorm:"null" json:"poster_url" binding:"required"`
 	ThumbnailURL string    `gorm:"null" json:"thumbnail_url" binding:"required"`
 	RulesPDFURL  string    `gorm:"null" json:"rules_pdf_url" binding:"required"`
-	CreatedAt    time.Time `gorm:"autoCreateTime" json:"created_at"`
-	UpdatedAt    time.Time `gorm:"autoUpdateTime" json:"updated_at"`
-	DeletedAt    time.Time `gorm:"default:null" json:"deleted_at,omitempty"`
 }

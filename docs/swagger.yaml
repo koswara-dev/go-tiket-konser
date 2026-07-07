@@ -1,51 +1,5 @@
 basePath: /api/v1
 definitions:
-  dto.ConcertRequest:
-    properties:
-      date:
-        type: string
-      description:
-        maxLength: 255
-        type: string
-      status:
-        enum:
-        - active
-        - upcoming
-        - canceled
-        type: string
-      title:
-        maxLength: 150
-        minLength: 5
-        type: string
-      venue:
-        maxLength: 100
-        minLength: 3
-        type: string
-    required:
-    - date
-    - status
-    - title
-    - venue
-    type: object
-  dto.ConcertResponse:
-    properties:
-      created_at:
-        type: string
-      date:
-        type: string
-      description:
-        type: string
-      id:
-        type: integer
-      status:
-        type: string
-      title:
-        type: string
-      updated_at:
-        type: string
-      venue:
-        type: string
-    type: object
   dto.CustomerResponse:
     properties:
       created_at:
@@ -53,13 +7,13 @@ definitions:
       email:
         type: string
       id:
-        type: integer
+        type: string
       name:
         type: string
       updated_at:
         type: string
       user_id:
-        type: integer
+        type: string
     type: object
   dto.CustomerUpdateRequest:
     properties:
@@ -110,13 +64,13 @@ definitions:
   dto.UserResponse:
     properties:
       customer_id:
-        type: integer
+        type: string
       email:
         type: string
       full_name:
         type: string
       id:
-        type: integer
+        type: string
       role:
         type: string
     type: object
@@ -152,40 +106,6 @@ definitions:
       success:
         type: boolean
     type: object
-  models.Concert:
-    properties:
-      created_at:
-        type: string
-      date:
-        type: string
-      deleted_at:
-        type: string
-      description:
-        type: string
-      id:
-        type: integer
-      poster_url:
-        type: string
-      rules_pdf_url:
-        type: string
-      status:
-        type: string
-      thumbnail_url:
-        type: string
-      title:
-        type: string
-      updated_at:
-        type: string
-      venue:
-        type: string
-    required:
-    - date
-    - poster_url
-    - rules_pdf_url
-    - thumbnail_url
-    - title
-    - venue
-    type: object
 host: localhost:8080
 info:
   contact:
@@ -200,320 +120,6 @@ info:
   title: Go Ticket Concert API
   version: "1.0"
 paths:
-  /concerts:
-    get:
-      consumes:
-      - application/json
-      description: Retrieve a paginated list of concerts with optional search filter
-        and sorting
-      parameters:
-      - in: query
-        minimum: 1
-        name: limit
-        type: integer
-      - in: query
-        minimum: 1
-        name: page
-        type: integer
-      - in: query
-        name: search
-        type: string
-      - enum:
-        - date_asc
-        - date_desc
-        - title_asc
-        - title_desc
-        in: query
-        name: sort
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/dto.WebResponse'
-            - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/dto.ConcertResponse'
-                  type: array
-                meta:
-                  $ref: '#/definitions/dto.PaginationMeta'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            allOf:
-            - $ref: '#/definitions/dto.WebResponse'
-            - properties:
-                data:
-                  type: string
-              type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            allOf:
-            - $ref: '#/definitions/dto.WebResponse'
-            - properties:
-                data:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: Get all concerts
-      tags:
-      - concerts
-    post:
-      consumes:
-      - application/json
-      description: Add a new concert record (Admin only)
-      parameters:
-      - description: Concert Info
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.ConcertRequest'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            additionalProperties: true
-            type: object
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties: true
-            type: object
-        "409":
-          description: Conflict
-          schema:
-            additionalProperties: true
-            type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            additionalProperties: true
-            type: object
-      security:
-      - ApiKeyAuth: []
-      - BearerAuth: []
-      summary: Create a concert
-      tags:
-      - concerts
-  /concerts/{id}:
-    delete:
-      description: Delete a concert record by ID (Admin only)
-      parameters:
-      - description: Concert ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            additionalProperties: true
-            type: object
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties: true
-            type: object
-        "404":
-          description: Not Found
-          schema:
-            additionalProperties: true
-            type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            additionalProperties: true
-            type: object
-      security:
-      - ApiKeyAuth: []
-      - BearerAuth: []
-      summary: Delete concert
-      tags:
-      - concerts
-    get:
-      description: Retrieve details of a single concert by its ID
-      parameters:
-      - description: Concert ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            additionalProperties: true
-            type: object
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties: true
-            type: object
-        "404":
-          description: Not Found
-          schema:
-            additionalProperties: true
-            type: object
-      security:
-      - ApiKeyAuth: []
-      summary: Get concert by ID
-      tags:
-      - concerts
-    put:
-      consumes:
-      - application/json
-      description: Update a concert's details by ID (Admin only)
-      parameters:
-      - description: Concert ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Concert Info to update
-        in: body
-        name: concert
-        required: true
-        schema:
-          $ref: '#/definitions/models.Concert'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.Concert'
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties: true
-            type: object
-        "404":
-          description: Not Found
-          schema:
-            additionalProperties: true
-            type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            additionalProperties: true
-            type: object
-      security:
-      - ApiKeyAuth: []
-      - BearerAuth: []
-      summary: Update concert
-      tags:
-      - concerts
-  /concerts/{id}/rules:
-    post:
-      consumes:
-      - multipart/form-data
-      description: Upload a PDF file outlining concert rules/policies (Admin only)
-      parameters:
-      - description: Concert ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Rules PDF file
-        in: formData
-        name: rules_pdf
-        required: true
-        type: file
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/dto.WebResponse'
-            - properties:
-                data:
-                  type: string
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            allOf:
-            - $ref: '#/definitions/dto.WebResponse'
-            - properties:
-                data:
-                  type: string
-              type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            allOf:
-            - $ref: '#/definitions/dto.WebResponse'
-            - properties:
-                data:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      - BearerAuth: []
-      summary: Upload concert rules PDF
-      tags:
-      - concerts
-  /concerts/{id}/thumbnail:
-    post:
-      consumes:
-      - multipart/form-data
-      description: Upload an image file as a thumbnail for a specific concert (Admin
-        only)
-      parameters:
-      - description: Concert ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Thumbnail image file
-        in: formData
-        name: thumbnail
-        required: true
-        type: file
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/dto.WebResponse'
-            - properties:
-                data:
-                  type: string
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            allOf:
-            - $ref: '#/definitions/dto.WebResponse'
-            - properties:
-                data:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      - BearerAuth: []
-      summary: Upload concert thumbnail
-      tags:
-      - concerts
   /customers:
     get:
       consumes:
@@ -606,7 +212,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -648,7 +254,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -692,7 +298,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Update Info
         in: body
         name: request
@@ -1010,7 +616,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -1052,7 +658,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -1095,7 +701,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Update Info
         in: body
         name: request

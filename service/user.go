@@ -5,13 +5,15 @@ import (
 	"go-tiket-konser/models"
 	"go-tiket-konser/repository"
 	"math"
+
+	"github.com/google/uuid"
 )
 
 type UserService interface {
 	GetAllUsers(req dto.UserQueryRequest) ([]dto.UserResponse, dto.PaginationMeta, error)
-	GetUserByID(id uint) (models.User, error)
-	UpdateUser(id uint, req *dto.UserUpdateRequest) (models.User, error)
-	DeleteUser(id uint) error
+	GetUserByID(id uuid.UUID) (models.User, error)
+	UpdateUser(id uuid.UUID, req *dto.UserUpdateRequest, updaterID uuid.UUID) (models.User, error)
+	DeleteUser(id uuid.UUID, deleterID uuid.UUID) error
 }
 
 type userService struct {
@@ -43,11 +45,11 @@ func (s *userService) GetAllUsers(req dto.UserQueryRequest) ([]dto.UserResponse,
 		return nil, dto.PaginationMeta{}, err
 	}
 
-	var responses []dto.UserResponse
+	var responses []dto.UserResponse = make([]dto.UserResponse, 0)
 	for _, user := range users {
-		var customerID uint
+		var customerID uuid.UUID
 		if user.Customer != nil {
-			customerID = uint(user.Customer.ID)
+			customerID = user.Customer.ID
 		}
 		responses = append(responses, dto.UserResponse{
 			ID:         user.ID,
@@ -73,7 +75,7 @@ func (s *userService) GetAllUsers(req dto.UserQueryRequest) ([]dto.UserResponse,
 	return responses, meta, nil
 }
 
-func (s *userService) GetUserByID(id uint) (models.User, error) {
+func (s *userService) GetUserByID(id uuid.UUID) (models.User, error) {
 	user, err := s.userRepo.GetUserById(id)
 	if err != nil {
 		return models.User{}, models.ErrUserNotFound
@@ -81,7 +83,7 @@ func (s *userService) GetUserByID(id uint) (models.User, error) {
 	return *user, nil
 }
 
-func (s *userService) UpdateUser(id uint, req *dto.UserUpdateRequest) (models.User, error) {
+func (s *userService) UpdateUser(id uuid.UUID, req *dto.UserUpdateRequest, updaterID uuid.UUID) (models.User, error) {
 	user, err := s.userRepo.GetUserById(id)
 	if err != nil {
 		return models.User{}, models.ErrUserNotFound
@@ -90,10 +92,12 @@ func (s *userService) UpdateUser(id uint, req *dto.UserUpdateRequest) (models.Us
 	user.FullName = req.FullName
 	user.Email = req.Email
 	user.Role = req.Role
+	user.UpdatedBy = &updaterID
 
 	if user.Customer != nil {
 		user.Customer.Name = req.FullName
 		user.Customer.Email = req.Email
+		user.Customer.UpdatedBy = &updaterID
 	}
 
 	err = s.userRepo.UpdateUser(user)
@@ -103,10 +107,15 @@ func (s *userService) UpdateUser(id uint, req *dto.UserUpdateRequest) (models.Us
 	return *user, nil
 }
 
-func (s *userService) DeleteUser(id uint) error {
-	_, err := s.userRepo.GetUserById(id)
+func (s *userService) DeleteUser(id uuid.UUID, deleterID uuid.UUID) error {
+	user, err := s.userRepo.GetUserById(id)
 	if err != nil {
 		return models.ErrUserNotFound
 	}
+	user.DeletedBy = &deleterID
+	if user.Customer != nil {
+		user.Customer.DeletedBy = &deleterID
+	}
+	_ = s.userRepo.UpdateUser(user)
 	return s.userRepo.DeleteUser(id)
 }

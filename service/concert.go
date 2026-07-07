@@ -1,26 +1,30 @@
 package service
 
 import (
+	"fmt"
 	"go-tiket-konser/dto"
 	"go-tiket-konser/models"
 	"go-tiket-konser/repository"
 	"math"
+
+	"github.com/google/uuid"
 )
 
 type ConcertService interface {
 	CreateConcert(concert *models.Concert) error
 	GetAllConcerts(req dto.ConcertQueryRequest) ([]dto.ConcertResponse, dto.PaginationMeta, error)
-	GetConcertByID(id int) (models.Concert, error)
+	GetConcertByID(id uuid.UUID) (models.Concert, error)
 	UpdateConcert(concert *models.Concert) error
-	DeleteConcert(id int) error
+	DeleteConcert(id uuid.UUID, deleterID uuid.UUID) error
 }
 
 type concertService struct {
-	repo repository.ConcertRepository
+	repo   repository.ConcertRepository
+	broker *NotificationBroker
 }
 
-func NewConcertService(repo repository.ConcertRepository) ConcertService {
-	return &concertService{repo: repo}
+func NewConcertService(repo repository.ConcertRepository, broker *NotificationBroker) ConcertService {
+	return &concertService{repo: repo, broker: broker}
 }
 
 func (s *concertService) CreateConcert(concert *models.Concert) error {
@@ -34,7 +38,12 @@ func (s *concertService) CreateConcert(concert *models.Concert) error {
 		}
 	}
 
-	return s.repo.Create(concert)
+	err = s.repo.Create(concert)
+	if err == nil && s.broker != nil {
+		msg := fmt.Sprintf("Konser baru '%s' telah ditambahkan di %s pada %s!", concert.Title, concert.Venue, concert.Date.Format("2006-01-02"))
+		_ = s.broker.SendNotification("", "Konser Baru!", msg)
+	}
+	return err
 }
 
 func (s *concertService) GetAllConcerts(req dto.ConcertQueryRequest) ([]dto.ConcertResponse, dto.PaginationMeta, error) {
@@ -63,17 +72,20 @@ func (s *concertService) GetAllConcerts(req dto.ConcertQueryRequest) ([]dto.Conc
 	}
 
 	// 5. Transformasi Entity Model Database ke dalam bentuk DTO Response
-	var responses []dto.ConcertResponse
+	var responses []dto.ConcertResponse = make([]dto.ConcertResponse, 0)
 	for _, c := range concerts {
 		responses = append(responses, dto.ConcertResponse{
-			ID:          c.ID,
-			Title:       c.Title,
-			Description: c.Description,
-			Date:        c.Date.Format("2006-01-02"),
-			Venue:       c.Venue,
-			Status:      c.Status,
-			CreatedAt:   c.CreatedAt,
-			UpdatedAt:   c.UpdatedAt,
+			ID:           c.ID,
+			Title:        c.Title,
+			Description:  c.Description,
+			Date:         c.Date.Format("2006-01-02"),
+			Venue:        c.Venue,
+			Status:       c.Status,
+			PosterURL:    c.PosterURL,
+			ThumbnailURL: c.ThumbnailURL,
+			RulesPDFURL:  c.RulesPDFURL,
+			CreatedAt:    c.CreatedAt,
+			UpdatedAt:    c.UpdatedAt,
 		})
 	}
 
@@ -94,7 +106,7 @@ func (s *concertService) GetAllConcerts(req dto.ConcertQueryRequest) ([]dto.Conc
 	return responses, meta, nil
 }
 
-func (s *concertService) GetConcertByID(id int) (models.Concert, error) {
+func (s *concertService) GetConcertByID(id uuid.UUID) (models.Concert, error) {
 	concert, err := s.repo.FindByID(id)
 	if err != nil {
 		return models.Concert{}, models.ErrConcertNotFound
@@ -103,17 +115,19 @@ func (s *concertService) GetConcertByID(id int) (models.Concert, error) {
 }
 
 func (s *concertService) UpdateConcert(concert *models.Concert) error {
-	_, err := s.repo.FindByID(int(concert.ID))
+	_, err := s.repo.FindByID(concert.ID)
 	if err != nil {
 		return models.ErrConcertNotFound
 	}
 	return s.repo.Update(concert)
 }
 
-func (s *concertService) DeleteConcert(id int) error {
-	_, err := s.repo.FindByID(id)
+func (s *concertService) DeleteConcert(id uuid.UUID, deleterID uuid.UUID) error {
+	concert, err := s.repo.FindByID(id)
 	if err != nil {
 		return models.ErrConcertNotFound
 	}
+	concert.DeletedBy = &deleterID
+	_ = s.repo.Update(&concert)
 	return s.repo.Delete(id)
 }

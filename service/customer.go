@@ -5,13 +5,15 @@ import (
 	"go-tiket-konser/models"
 	"go-tiket-konser/repository"
 	"math"
+
+	"github.com/google/uuid"
 )
 
 type CustomerService interface {
 	GetAllCustomers(req dto.CustomerQueryRequest) ([]dto.CustomerResponse, dto.PaginationMeta, error)
-	GetCustomerByID(id int) (models.Customer, error)
-	UpdateCustomer(id int, req *dto.CustomerUpdateRequest) (models.Customer, error)
-	DeleteCustomer(id int) error
+	GetCustomerByID(id uuid.UUID) (models.Customer, error)
+	UpdateCustomer(id uuid.UUID, req *dto.CustomerUpdateRequest, updaterID uuid.UUID) (models.Customer, error)
+	DeleteCustomer(id uuid.UUID, deleterID uuid.UUID) error
 }
 
 type customerService struct {
@@ -43,7 +45,7 @@ func (s *customerService) GetAllCustomers(req dto.CustomerQueryRequest) ([]dto.C
 		return nil, dto.PaginationMeta{}, err
 	}
 
-	var responses []dto.CustomerResponse
+	var responses []dto.CustomerResponse = make([]dto.CustomerResponse, 0)
 	for _, cust := range customers {
 		responses = append(responses, dto.CustomerResponse{
 			ID:        cust.ID,
@@ -70,7 +72,7 @@ func (s *customerService) GetAllCustomers(req dto.CustomerQueryRequest) ([]dto.C
 	return responses, meta, nil
 }
 
-func (s *customerService) GetCustomerByID(id int) (models.Customer, error) {
+func (s *customerService) GetCustomerByID(id uuid.UUID) (models.Customer, error) {
 	customer, err := s.customerRepo.FindByID(id)
 	if err != nil {
 		return models.Customer{}, models.ErrCustomerNotFound
@@ -78,7 +80,7 @@ func (s *customerService) GetCustomerByID(id int) (models.Customer, error) {
 	return customer, nil
 }
 
-func (s *customerService) UpdateCustomer(id int, req *dto.CustomerUpdateRequest) (models.Customer, error) {
+func (s *customerService) UpdateCustomer(id uuid.UUID, req *dto.CustomerUpdateRequest, updaterID uuid.UUID) (models.Customer, error) {
 	customer, err := s.customerRepo.FindByID(id)
 	if err != nil {
 		return models.Customer{}, models.ErrCustomerNotFound
@@ -86,6 +88,7 @@ func (s *customerService) UpdateCustomer(id int, req *dto.CustomerUpdateRequest)
 
 	customer.Name = req.Name
 	customer.Email = req.Email
+	customer.UpdatedBy = &updaterID
 
 	err = s.customerRepo.UpdateCustomer(&customer)
 	if err != nil {
@@ -94,10 +97,12 @@ func (s *customerService) UpdateCustomer(id int, req *dto.CustomerUpdateRequest)
 	return customer, nil
 }
 
-func (s *customerService) DeleteCustomer(id int) error {
-	_, err := s.customerRepo.FindByID(id)
+func (s *customerService) DeleteCustomer(id uuid.UUID, deleterID uuid.UUID) error {
+	customer, err := s.customerRepo.FindByID(id)
 	if err != nil {
 		return models.ErrCustomerNotFound
 	}
+	customer.DeletedBy = &deleterID
+	_ = s.customerRepo.UpdateCustomer(&customer)
 	return s.customerRepo.DeleteCustomer(id)
 }

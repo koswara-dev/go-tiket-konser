@@ -1,10 +1,12 @@
 package routes
 
 import (
+	"go-tiket-konser/config"
 	"go-tiket-konser/handler"
 	"go-tiket-konser/middleware"
 	"go-tiket-konser/repository"
 	"go-tiket-konser/service"
+	"os"
 
 	_ "go-tiket-konser/docs"
 
@@ -20,6 +22,14 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	r.Use(gin.Recovery())
 	r.Use(middleware.LoggerMiddleware())
 
+	// Initialize MongoDB audit log service and middleware
+	auditService := service.NewAuditLogService(config.MongoDatabase)
+	r.Use(middleware.AuditLogMiddleware(auditService))
+
+	// Initialize SSE Notifications Broker and Handler
+	notificationBroker := service.NewNotificationBroker(config.MongoDatabase)
+	notificationHandler := handler.NewNotificationHandler(notificationBroker)
+
 	// 1. inisiasi storage provider
 	storageProvider := service.NewLocalStorageProvider("uploads", "http://localhost:8080")
 
@@ -31,12 +41,13 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	r.Use(middleware.RateLimiter(100))
 
 	// Swagger Route
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	if os.Getenv("APP_ENV") != "production" {
+		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	}
 
 	// Initialize layers
 	concertRepo := repository.NewConcertRepository(db)
-	concertService := service.NewConcertService(concertRepo)
-
+	concertService := service.NewConcertService(concertRepo, notificationBroker)
 	concertHandler := handler.NewConcertHandler(concertService, storageProvider)
 
 	ticketCategoryRepo := repository.NewTicketCategoryRepository(db)
@@ -46,12 +57,12 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	// Inisialisasi layer Booking
 	customerRepo := repository.NewCustomerRepository(db)
 	bookingRepo := repository.NewBookingRepository(db)
-	bookingService := service.NewBookingService(db, bookingRepo, customerRepo)
+	bookingService := service.NewBookingService(db, bookingRepo, customerRepo, notificationBroker)
 	bookingHandler := handler.NewBookingHandler(bookingService)
 
 	// inisialisasi layer authentication
 	userRepo := repository.NewUserRepository(db)
-	blacklistedTokenRepo := repository.NewBlacklistedTokenRepository(db)
+	blacklistedTokenRepo := repository.NewBlacklistedTokenRepository(config.RedisClient)
 	emailService := service.NewEmailService()
 	authService := service.NewAuthService(userRepo, blacklistedTokenRepo, emailService)
 	authHandler := handler.NewAuthHandler(authService)
@@ -62,6 +73,10 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 
 	customerServiceInstance := service.NewCustomerService(customerRepo)
 	customerHandlerInstance := handler.NewCustomerHandler(customerServiceInstance)
+
+	// Inisialisasi layer Chat
+	chatHub := service.NewChatHub(config.MongoDatabase, db)
+	chatHandler := handler.NewChatHandler(chatHub, blacklistedTokenRepo, db)
 
 	// Group routes
 	api := r.Group("/api/v1")
@@ -103,6 +118,15 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 		api.GET("/customers/:id", middleware.JWTAuth(blacklistedTokenRepo), customerHandlerInstance.GetCustomerByID)
 		api.PUT("/customers/:id", middleware.JWTAuth(blacklistedTokenRepo), customerHandlerInstance.UpdateCustomer)
 		api.DELETE("/customers/:id", middleware.JWTAuth(blacklistedTokenRepo), middleware.RequireRole("admin"), customerHandlerInstance.DeleteCustomer)
+
+		// Notifications (JWT Protected)
+		api.GET("/notifications/stream", middleware.JWTAuth(blacklistedTokenRepo), notificationHandler.Stream)
+		api.GET("/notifications", middleware.JWTAuth(blacklistedTokenRepo), notificationHandler.GetHistory)
+
+		// Chat routes
+		api.GET("/chat/ws", chatHandler.WS)
+		api.GET("/chat/rooms", middleware.JWTAuth(blacklistedTokenRepo), middleware.RequireRole("admin"), chatHandler.GetRooms)
+		api.GET("/chat/rooms/:roomId/messages", middleware.JWTAuth(blacklistedTokenRepo), chatHandler.GetMessages)
 
 		// Protected routes (JWT)
 		protected := api.Group("")

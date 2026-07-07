@@ -3,16 +3,17 @@ package repository
 import (
 	"go-tiket-konser/models"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type UserRepository interface {
 	CreateUser(user *models.User) error
 	GetUserByEmail(email string) (*models.User, error)
-	GetUserById(id uint) (*models.User, error)
+	GetUserById(id uuid.UUID) (*models.User, error)
 	GetAllUsers(search string, limit int, offset int, sort string) ([]models.User, int64, error)
 	UpdateUser(user *models.User) error
-	DeleteUser(id uint) error
+	DeleteUser(id uuid.UUID) error
 }
 
 type userRepository struct {
@@ -33,7 +34,7 @@ func (r *userRepository) GetUserByEmail(email string) (*models.User, error) {
 	return &user, err
 }
 
-func (r *userRepository) GetUserById(id uint) (*models.User, error) {
+func (r *userRepository) GetUserById(id uuid.UUID) (*models.User, error) {
 	var user models.User
 	err := r.db.Preload("Customer").First(&user, id).Error
 	return &user, err
@@ -74,7 +75,7 @@ func (r *userRepository) UpdateUser(user *models.User) error {
 	return r.db.Save(user).Error
 }
 
-func (r *userRepository) DeleteUser(id uint) error {
+func (r *userRepository) DeleteUser(id uuid.UUID) error {
 	var user models.User
 	if err := r.db.First(&user, id).Error; err != nil {
 		return err

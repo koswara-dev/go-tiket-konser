@@ -4,6 +4,7 @@ import (
 	"go-tiket-konser/models"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -25,7 +26,7 @@ func (m *MockUserRepository) GetUserByEmail(email string) (*models.User, error) 
 	return args.Get(0).(*models.User), args.Error(1)
 }
 
-func (m *MockUserRepository) GetUserById(id uint) (*models.User, error) {
+func (m *MockUserRepository) GetUserById(id uuid.UUID) (*models.User, error) {
 	args := m.Called(id)
 	if args.Get(0) == nil {
 		return nil, args.Error(1)
@@ -47,7 +48,7 @@ func (m *MockUserRepository) UpdateUser(user *models.User) error {
 	return args.Error(0)
 }
 
-func (m *MockUserRepository) DeleteUser(id uint) error {
+func (m *MockUserRepository) DeleteUser(id uuid.UUID) error {
 	args := m.Called(id)
 	return args.Error(0)
 }
@@ -105,7 +106,7 @@ func (m *MockConcertRepository) FindAllPaginated(search string, limit int, offse
 	return concerts, args.Get(1).(int64), args.Error(2)
 }
 
-func (m *MockConcertRepository) FindByID(id int) (models.Concert, error) {
+func (m *MockConcertRepository) FindByID(id uuid.UUID) (models.Concert, error) {
 	args := m.Called(id)
 	return args.Get(0).(models.Concert), args.Error(1)
 }
@@ -115,7 +116,7 @@ func (m *MockConcertRepository) Update(concert *models.Concert) error {
 	return args.Error(0)
 }
 
-func (m *MockConcertRepository) Delete(id int) error {
+func (m *MockConcertRepository) Delete(id uuid.UUID) error {
 	args := m.Called(id)
 	return args.Error(0)
 }

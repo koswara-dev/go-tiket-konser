@@ -3,14 +3,16 @@ package service
 import (
 	"go-tiket-konser/models"
 	"go-tiket-konser/repository"
+
+	"github.com/google/uuid"
 )
 
 type TicketCategoryService interface {
 	CreateTicketCategory(category *models.TicketCategory) error
 	GetAllTicketCategories() ([]models.TicketCategory, error)
-	GetTicketCategoryByID(id int) (models.TicketCategory, error)
+	GetTicketCategoryByID(id uuid.UUID) (models.TicketCategory, error)
 	UpdateTicketCategory(category *models.TicketCategory) error
-	DeleteTicketCategory(id int) error
+	DeleteTicketCategory(id uuid.UUID, deleterID uuid.UUID) error
 }
 
 type ticketCategoryService struct {
@@ -41,7 +43,7 @@ func (s *ticketCategoryService) GetAllTicketCategories() ([]models.TicketCategor
 	return s.categoryRepo.FindAll()
 }
 
-func (s *ticketCategoryService) GetTicketCategoryByID(id int) (models.TicketCategory, error) {
+func (s *ticketCategoryService) GetTicketCategoryByID(id uuid.UUID) (models.TicketCategory, error) {
 	return s.categoryRepo.FindByID(id)
 }
 
@@ -54,6 +56,12 @@ func (s *ticketCategoryService) UpdateTicketCategory(category *models.TicketCate
 	return s.categoryRepo.Update(category)
 }
 
-func (s *ticketCategoryService) DeleteTicketCategory(id int) error {
+func (s *ticketCategoryService) DeleteTicketCategory(id uuid.UUID, deleterID uuid.UUID) error {
+	category, err := s.categoryRepo.FindByID(id)
+	if err != nil {
+		return err
+	}
+	category.DeletedBy = &deleterID
+	_ = s.categoryRepo.Update(&category)
 	return s.categoryRepo.Delete(id)
 }

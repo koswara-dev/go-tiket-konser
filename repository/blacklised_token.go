@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"go-tiket-konser/models"
+	"context"
 	"time"
 
-	"gorm.io/gorm"
+	"github.com/redis/go-redis/v9"
 )
 
 type BlacklistedTokenRepository interface {
@@ -13,24 +13,27 @@ type BlacklistedTokenRepository interface {
 }
 
 type blacklistedTokenRepository struct {
-	db *gorm.DB
+	redisClient *redis.Client
 }
 
-func NewBlacklistedTokenRepository(db *gorm.DB) BlacklistedTokenRepository {
-	return &blacklistedTokenRepository{db: db}
+func NewBlacklistedTokenRepository(redisClient *redis.Client) BlacklistedTokenRepository {
+	return &blacklistedTokenRepository{redisClient: redisClient}
 }
 
 func (r *blacklistedTokenRepository) BlacklistToken(token string, expiresAt time.Time) error {
-	return r.db.Create(&models.BlacklistedToken{
-		TokenString: token,
-		ExpiredAt:   expiresAt,
-	}).Error
+	ctx := context.Background()
+	ttl := time.Until(expiresAt)
+	if ttl <= 0 {
+		return nil
+	}
+	return r.redisClient.Set(ctx, "blacklist:"+token, "true", ttl).Err()
 }
 
 func (r *blacklistedTokenRepository) IsTokenBlacklisted(token string) (bool, error) {
-	var count int64
-	err := r.db.Model(&models.BlacklistedToken{}).
-		Where("token_string = ? AND expired_at > ?", token, time.Now()).
-		Count(&count).Error
-	return count > 0, err
+	ctx := context.Background()
+	val, err := r.redisClient.Exists(ctx, "blacklist:"+token).Result()
+	if err != nil {
+		return false, err
+	}
+	return val > 0, nil
 }

@@ -15,6 +15,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
+	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -40,9 +41,19 @@ func init() {
 	}
 }
 
+func setTestUserContext() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Set("user_id", uuid.MustParse("99999999-9999-9999-9999-999999999999"))
+		c.Set("customer_id", uuid.MustParse("11111111-1111-1111-1111-111111111111"))
+		c.Set("role", "admin")
+		c.Next()
+	}
+}
+
 func TestCreateConcert_Handler_Success(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	r := gin.Default()
+	r.Use(setTestUserContext())
 
 	mockServ := new(MockConcertService)
 	mockSP := new(MockStorageProvider)
@@ -60,9 +71,10 @@ func TestCreateConcert_Handler_Success(t *testing.T) {
 		Status:      "active",
 	}
 
+	concertID := uuid.New()
 	mockServ.On("CreateConcert", mock.AnythingOfType("*models.Concert")).Return(nil).Run(func(args mock.Arguments) {
 		c := args.Get(0).(*models.Concert)
-		c.ID = 1
+		c.ID = concertID
 	})
 
 	body, _ := json.Marshal(reqBody)
@@ -98,9 +110,10 @@ func TestGetConcerts_Handler_Success(t *testing.T) {
 		Limit: 10,
 	}
 
+	id1 := uuid.New()
 	concertsResp := []dto.ConcertResponse{
 		{
-			ID:    1,
+			ID:    id1,
 			Title: "Konser Musik Hebat",
 		},
 	}
@@ -137,15 +150,18 @@ func TestGetConcertByID_Handler_Success(t *testing.T) {
 
 	r.GET("/concerts/:id", h.GetConcertByID)
 
+	id1 := uuid.New()
 	dummyConcert := models.Concert{
-		ID:    1,
+		BaseModel: models.BaseModel{
+			ID: id1,
+		},
 		Title: "Konser Musik Hebat",
 		Date:  time.Now(),
 	}
 
-	mockServ.On("GetConcertByID", 1).Return(dummyConcert, nil)
+	mockServ.On("GetConcertByID", id1).Return(dummyConcert, nil)
 
-	req, _ := http.NewRequest(http.MethodGet, "/concerts/1", nil)
+	req, _ := http.NewRequest(http.MethodGet, "/concerts/"+id1.String(), nil)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 
@@ -169,9 +185,10 @@ func TestGetConcertByID_Handler_NotFound(t *testing.T) {
 
 	r.GET("/concerts/:id", h.GetConcertByID)
 
-	mockServ.On("GetConcertByID", 99).Return(models.Concert{}, gorm.ErrRecordNotFound)
+	idErr := uuid.New()
+	mockServ.On("GetConcertByID", idErr).Return(models.Concert{}, gorm.ErrRecordNotFound)
 
-	req, _ := http.NewRequest(http.MethodGet, "/concerts/99", nil)
+	req, _ := http.NewRequest(http.MethodGet, "/concerts/"+idErr.String(), nil)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 
@@ -189,6 +206,7 @@ func TestGetConcertByID_Handler_NotFound(t *testing.T) {
 func TestUpdateConcert_Handler_Success(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	r := gin.Default()
+	r.Use(setTestUserContext())
 
 	mockServ := new(MockConcertService)
 	mockSP := new(MockStorageProvider)
@@ -196,12 +214,15 @@ func TestUpdateConcert_Handler_Success(t *testing.T) {
 
 	r.PUT("/concerts/:id", h.UpdateConcert)
 
+	id1 := uuid.New()
 	dummyConcert := models.Concert{
-		ID:    1,
+		BaseModel: models.BaseModel{
+			ID: id1,
+		},
 		Title: "Old Title",
 	}
 
-	mockServ.On("GetConcertByID", 1).Return(dummyConcert, nil)
+	mockServ.On("GetConcertByID", id1).Return(dummyConcert, nil)
 	mockServ.On("UpdateConcert", mock.AnythingOfType("*models.Concert")).Return(nil)
 
 	futureDate := time.Now().AddDate(0, 0, 10)
@@ -217,7 +238,7 @@ func TestUpdateConcert_Handler_Success(t *testing.T) {
 	}
 
 	body, _ := json.Marshal(inputConcert)
-	req, _ := http.NewRequest(http.MethodPut, "/concerts/1", bytes.NewBuffer(body))
+	req, _ := http.NewRequest(http.MethodPut, "/concerts/"+id1.String(), bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 
 	w := httptest.NewRecorder()
@@ -231,6 +252,7 @@ func TestUpdateConcert_Handler_Success(t *testing.T) {
 func TestDeleteConcert_Handler_Success(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	r := gin.Default()
+	r.Use(setTestUserContext())
 
 	mockServ := new(MockConcertService)
 	mockSP := new(MockStorageProvider)
@@ -238,9 +260,11 @@ func TestDeleteConcert_Handler_Success(t *testing.T) {
 
 	r.DELETE("/concerts/:id", h.DeleteConcert)
 
-	mockServ.On("DeleteConcert", 1).Return(nil)
+	id1 := uuid.New()
+	adminUserID := uuid.MustParse("99999999-9999-9999-9999-999999999999")
+	mockServ.On("DeleteConcert", id1, adminUserID).Return(nil)
 
-	req, _ := http.NewRequest(http.MethodDelete, "/concerts/1", nil)
+	req, _ := http.NewRequest(http.MethodDelete, "/concerts/"+id1.String(), nil)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 

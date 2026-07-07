@@ -2,12 +2,12 @@ package handler
 
 import (
 	"net/http"
-	"strconv"
 
 	"go-tiket-konser/dto"
 	"go-tiket-konser/service"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 type UserHandler struct {
@@ -68,7 +68,7 @@ func (h *UserHandler) GetAllUsers(c *gin.Context) {
 // @Description  Get a user's details by their ID (Admin or own user check)
 // @Tags         users
 // @Produce      json
-// @Param        id   path      int  true  "User ID"
+// @Param        id   path      string  true  "User ID"
 // @Success      200  {object}  dto.UserResponse
 // @Failure      400  {object}  map[string]interface{}
 // @Failure      401  {object}  map[string]interface{}
@@ -79,29 +79,29 @@ func (h *UserHandler) GetAllUsers(c *gin.Context) {
 // @Router       /users/{id} [get]
 func (h *UserHandler) GetUserByID(c *gin.Context) {
 	idStr := c.Param("id")
-	requestedID, err := strconv.ParseUint(idStr, 10, 32)
+	requestedID, err := uuid.Parse(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "ID tidak valid"})
 		return
 	}
 
-	tokenUserID := c.MustGet("user_id").(uint)
+	tokenUserID := c.MustGet("user_id").(uuid.UUID)
 	tokenRole := c.MustGet("role").(string)
 
-	if tokenRole != "admin" && tokenUserID != uint(requestedID) {
+	if tokenRole != "admin" && tokenUserID != requestedID {
 		c.JSON(http.StatusForbidden, gin.H{"error": "Akses ditolak: tidak dapat mengakses data user lain"})
 		return
 	}
 
-	user, err := h.service.GetUserByID(uint(requestedID))
+	user, err := h.service.GetUserByID(requestedID)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "User tidak ditemukan"})
 		return
 	}
 
-	var customerID uint
+	var customerID uuid.UUID
 	if user.Customer != nil {
-		customerID = uint(user.Customer.ID)
+		customerID = user.Customer.ID
 	}
 
 	c.JSON(http.StatusOK, dto.UserResponse{
@@ -119,7 +119,7 @@ func (h *UserHandler) GetUserByID(c *gin.Context) {
 // @Tags         users
 // @Accept       json
 // @Produce      json
-// @Param        id      path      int                     true  "User ID"
+// @Param        id      path      string                  true  "User ID"
 // @Param        request body      dto.UserUpdateRequest  true  "Update Info"
 // @Success      200     {object}  dto.UserResponse
 // @Failure      400     {object}  map[string]interface{}
@@ -131,16 +131,16 @@ func (h *UserHandler) GetUserByID(c *gin.Context) {
 // @Router       /users/{id} [put]
 func (h *UserHandler) UpdateUser(c *gin.Context) {
 	idStr := c.Param("id")
-	requestedID, err := strconv.ParseUint(idStr, 10, 32)
+	requestedID, err := uuid.Parse(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "ID tidak valid"})
 		return
 	}
 
-	tokenUserID := c.MustGet("user_id").(uint)
+	tokenUserID := c.MustGet("user_id").(uuid.UUID)
 	tokenRole := c.MustGet("role").(string)
 
-	if tokenRole != "admin" && tokenUserID != uint(requestedID) {
+	if tokenRole != "admin" && tokenUserID != requestedID {
 		c.JSON(http.StatusForbidden, gin.H{"error": "Akses ditolak: tidak dapat memperbarui data user lain"})
 		return
 	}
@@ -156,15 +156,15 @@ func (h *UserHandler) UpdateUser(c *gin.Context) {
 		req.Role = "customer"
 	}
 
-	user, err := h.service.UpdateUser(uint(requestedID), &req)
+	user, err := h.service.UpdateUser(requestedID, &req, tokenUserID)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
 
-	var customerID uint
+	var customerID uuid.UUID
 	if user.Customer != nil {
-		customerID = uint(user.Customer.ID)
+		customerID = user.Customer.ID
 	}
 
 	c.JSON(http.StatusOK, dto.UserResponse{
@@ -181,7 +181,7 @@ func (h *UserHandler) UpdateUser(c *gin.Context) {
 // @Description  Delete a user record by ID (Admin only)
 // @Tags         users
 // @Produce      json
-// @Param        id   path      int  true  "User ID"
+// @Param        id   path      string  true  "User ID"
 // @Success      200  {object}  map[string]interface{}
 // @Failure      400  {object}  map[string]interface{}
 // @Failure      401  {object}  map[string]interface{}
@@ -192,13 +192,15 @@ func (h *UserHandler) UpdateUser(c *gin.Context) {
 // @Router       /users/{id} [delete]
 func (h *UserHandler) DeleteUser(c *gin.Context) {
 	idStr := c.Param("id")
-	requestedID, err := strconv.ParseUint(idStr, 10, 32)
+	requestedID, err := uuid.Parse(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "ID tidak valid"})
 		return
 	}
 
-	err = h.service.DeleteUser(uint(requestedID))
+	tokenUserID := c.MustGet("user_id").(uuid.UUID)
+
+	err = h.service.DeleteUser(requestedID, tokenUserID)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "User tidak ditemukan"})
 		return

@@ -10,16 +10,17 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
 var JWTSecretKey = []byte("juara-coding-super-secret-key-2026-batch-1")
 
 type JWTClaims struct {
-	UserID     uint   `json:"user_id"`
-	CustomerID uint   `json:"customer_id,omitempty"`
-	Email      string `json:"email"`
-	Role       string `json:"role"`
+	UserID     uuid.UUID `json:"user_id"`
+	CustomerID uuid.UUID `json:"customer_id,omitempty"`
+	Email      string    `json:"email"`
+	Role       string    `json:"role"`
 	jwt.RegisteredClaims
 }
 
@@ -27,7 +28,7 @@ type AuthService interface {
 	Register(email, password, fullName string) (*models.User, error)
 	Login(email, password string) (string, error)
 	Logout(tokenString string) error
-	GetProfile(id uint) (*models.User, error)
+	GetProfile(id uuid.UUID) (*models.User, error)
 	VerifyOTP(email, otp string) error
 }
 
@@ -72,10 +73,12 @@ func (s *authService) Register(email, password, fullName string) (*models.User, 
 	role := "customer"
 
 	var customer *models.Customer
+	userID := uuid.New()
 	if role == "customer" {
 		customer = &models.Customer{
-			Name:  fullName,
-			Email: email,
+			UserID: userID,
+			Name:   fullName,
+			Email:  email,
 		}
 	}
 
@@ -85,6 +88,9 @@ func (s *authService) Register(email, password, fullName string) (*models.User, 
 
 	// Create the new user
 	user := models.User{
+		BaseModel: models.BaseModel{
+			ID: userID,
+		},
 		Email:        email,
 		Password:     string(hashedPassword),
 		FullName:     fullName,
@@ -123,9 +129,9 @@ func (s *authService) Login(email, password string) (string, error) {
 	}
 
 	// Generate the JWT token
-	var customerID uint
+	var customerID uuid.UUID
 	if user.Customer != nil {
-		customerID = uint(user.Customer.ID)
+		customerID = user.Customer.ID
 	}
 
 	claims := JWTClaims{
@@ -144,10 +150,21 @@ func (s *authService) Login(email, password string) (string, error) {
 }
 
 func (s *authService) Logout(tokenString string) error {
-	return s.blacklistRepo.BlacklistToken(tokenString, time.Now().Add(24*time.Hour))
+	// Try parsing token to get its exact expiration time
+	claims := &JWTClaims{}
+	_, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return JWTSecretKey, nil
+	})
+
+	expiresAt := time.Now().Add(24 * time.Hour)
+	if err == nil && claims.ExpiresAt != nil {
+		expiresAt = claims.ExpiresAt.Time
+	}
+
+	return s.blacklistRepo.BlacklistToken(tokenString, expiresAt)
 }
 
-func (s *authService) GetProfile(id uint) (*models.User, error) {
+func (s *authService) GetProfile(id uuid.UUID) (*models.User, error) {
 	return s.userRepo.GetUserById(id)
 }
 

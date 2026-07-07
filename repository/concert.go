@@ -3,6 +3,7 @@ package repository
 import (
 	"go-tiket-konser/models"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -10,9 +11,9 @@ type ConcertRepository interface {
 	Create(concert *models.Concert) error
 	FindAll() ([]models.Concert, error)
 	FindAllPaginated(search string, limit int, offset int, sort string) ([]models.Concert, int64, error)
-	FindByID(id int) (models.Concert, error)
+	FindByID(id uuid.UUID) (models.Concert, error)
 	Update(concert *models.Concert) error
-	Delete(id int) error
+	Delete(id uuid.UUID) error
 }
 
 type concertRepository struct {
@@ -33,7 +34,7 @@ func (r *concertRepository) FindAll() ([]models.Concert, error) {
 	return concerts, err
 }
 
-func (r *concertRepository) FindByID(id int) (models.Concert, error) {
+func (r *concertRepository) FindByID(id uuid.UUID) (models.Concert, error) {
 	var concert models.Concert
 	err := r.db.First(&concert, id).Error
 	return concert, err
@@ -43,7 +44,7 @@ func (r *concertRepository) Update(concert *models.Concert) error {
 	return r.db.Save(concert).Error
 }
 
-func (r *concertRepository) Delete(id int) error {
+func (r *concertRepository) Delete(id uuid.UUID) error {
 	var concert models.Concert
 	if err := r.db.First(&concert, id).Error; err != nil {
 		return err

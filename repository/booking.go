@@ -3,13 +3,14 @@ package repository
 import (
 	"go-tiket-konser/models"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type BookingRepository interface {
 	Create(booking *models.Booking) error
 	CreateDetail(detail *models.BookingDetail) error
-	FindByID(id int) (models.Booking, error)
+	FindByID(id uuid.UUID) (models.Booking, error)
 	Update(booking *models.Booking) error
 }
 
@@ -29,7 +30,7 @@ func (r *bookingRepository) CreateDetail(detail *models.BookingDetail) error {
 	return r.db.Create(detail).Error
 }
 
-func (r *bookingRepository) FindByID(id int) (models.Booking, error) {
+func (r *bookingRepository) FindByID(id uuid.UUID) (models.Booking, error) {
 	var booking models.Booking
 	err := r.db.Preload("Customer").
 		Preload("Details.TicketCategory.Concert").

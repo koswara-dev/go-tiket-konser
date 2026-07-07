@@ -4,7 +4,6 @@ import (
 	"errors"
 	"net/http"
 	"path/filepath"
-	"strconv"
 	"strings"
 	"time"
 
@@ -14,6 +13,7 @@ import (
 	"go-tiket-konser/utils/logger"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )
@@ -27,23 +27,9 @@ func NewConcertHandler(s service.ConcertService, sp service.StorageProvider) *Co
 	return &ConcertHandler{service: s, storageProvider: sp}
 }
 
-// UploadTumbnail handles POST /api/v1/concerts/:id/thumbnail
-// UploadTumbnail godoc
-// @Summary      Upload concert thumbnail
-// @Description  Upload an image file as a thumbnail for a specific concert (Admin only)
-// @Tags         concerts
-// @Accept       multipart/form-data
-// @Produce      json
-// @Param        id         path      int   true  "Concert ID"
-// @Param        thumbnail  formData  file  true  "Thumbnail image file"
-// @Success      200        {object}  dto.WebResponse{data=string}
-// @Failure      400        {object}  dto.WebResponse{data=string}
-// @Security     ApiKeyAuth
-// @Security     BearerAuth
-// @Router       /concerts/{id}/thumbnail [post]
 func (h *ConcertHandler) UploadTumbnail(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	id, err := uuid.Parse(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, dto.WebResponse{
 			Success: false,
@@ -52,7 +38,6 @@ func (h *ConcertHandler) UploadTumbnail(c *gin.Context) {
 		return
 	}
 
-	// 1. ambil file thumnail dari form request
 	file, err := c.FormFile("thumbnail")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, dto.WebResponse{
@@ -62,7 +47,6 @@ func (h *ConcertHandler) UploadTumbnail(c *gin.Context) {
 		return
 	}
 
-	// 2. simpan file menggunakan StorageProvider
 	fileUrl, err := h.storageProvider.UploadFile(file, c)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, dto.WebResponse{
@@ -72,7 +56,6 @@ func (h *ConcertHandler) UploadTumbnail(c *gin.Context) {
 		return
 	}
 
-	// 3. Update field ThumbnailURL di database
 	concert, err := h.service.GetConcertByID(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, dto.WebResponse{
@@ -82,7 +65,11 @@ func (h *ConcertHandler) UploadTumbnail(c *gin.Context) {
 		return
 	}
 
+	userIDVal, _ := c.Get("user_id")
+	userID := userIDVal.(uuid.UUID)
+
 	concert.ThumbnailURL = fileUrl
+	concert.UpdatedBy = &userID
 	if err := h.service.UpdateConcert(&concert); err != nil {
 		c.JSON(http.StatusBadRequest, dto.WebResponse{
 			Success: false,
@@ -98,58 +85,43 @@ func (h *ConcertHandler) UploadTumbnail(c *gin.Context) {
 	})
 }
 
-// UploadRulesPDF handles POST /api/v1/concerts/:id/rules
-// UploadRulesPDF godoc
-// @Summary      Upload concert rules PDF
-// @Description  Upload a PDF file outlining concert rules/policies (Admin only)
-// @Tags         concerts
-// @Accept       multipart/form-data
-// @Produce      json
-// @Param        id         path      int   true  "Concert ID"
-// @Param        rules_pdf  formData  file  true  "Rules PDF file"
-// @Success      200        {object}  dto.WebResponse{data=string}
-// @Failure      400        {object}  dto.WebResponse{data=string}
-// @Failure      500        {object}  dto.WebResponse{data=string}
-// @Security     ApiKeyAuth
-// @Security     BearerAuth
-// @Router       /concerts/{id}/rules [post]
 func (h *ConcertHandler) UploadRulesPDF(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	id, err := uuid.Parse(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, dto.WebResponse{Success: false, Message: "ID Konser tidak valid"})
 		return
 	}
 
-	// 1. Ambil berkas PDF dari request form dengan key name "rules_pdf"
 	file, err := c.FormFile("rules_pdf")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, dto.WebResponse{Success: false, Message: "Berkas PDF tata tertib wajib dikirim"})
 		return
 	}
 
-	// 2. Validasi Ekstensi Berkas (Khusus PDF tata tertib)
 	ext := strings.ToLower(filepath.Ext(file.Filename))
 	if ext != ".pdf" {
 		c.JSON(http.StatusBadRequest, dto.WebResponse{Success: false, Message: "Format berkas tidak didukung: hanya diperbolehkan PDF (.pdf)"})
 		return
 	}
 
-	// 3. Simpan berkas PDF menggunakan StorageProvider (Local/Cloud)
 	fileURL, err := h.storageProvider.UploadFile(file, c)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, dto.WebResponse{Success: false, Message: err.Error()})
 		return
 	}
 
-	// 4. Perbarui field RulesPDFURL di database konser
 	concert, err := h.service.GetConcertByID(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, dto.WebResponse{Success: false, Message: "Konser tidak ditemukan"})
 		return
 	}
 
+	userIDVal, _ := c.Get("user_id")
+	userID := userIDVal.(uuid.UUID)
+
 	concert.RulesPDFURL = fileURL
+	concert.UpdatedBy = &userID
 	err = h.service.UpdateConcert(&concert)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, dto.WebResponse{Success: false, Message: "Gagal menyimpan berkas PDF tata tertib"})
@@ -163,21 +135,6 @@ func (h *ConcertHandler) UploadRulesPDF(c *gin.Context) {
 	})
 }
 
-// CreateConcert handles POST /api/v1/concerts
-// CreateConcert godoc
-// @Summary      Create a concert
-// @Description  Add a new concert record (Admin only)
-// @Tags         concerts
-// @Accept       json
-// @Produce      json
-// @Param        request  body      dto.ConcertRequest  true  "Concert Info"
-// @Success      201      {object}  map[string]interface{}
-// @Failure      400      {object}  map[string]interface{}
-// @Failure      409      {object}  map[string]interface{}
-// @Failure      500      {object}  map[string]interface{}
-// @Security     ApiKeyAuth
-// @Security     BearerAuth
-// @Router       /concerts [post]
 func (h *ConcertHandler) CreateConcert(c *gin.Context) {
 	var req dto.ConcertRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -191,7 +148,13 @@ func (h *ConcertHandler) CreateConcert(c *gin.Context) {
 
 	parseDate, _ := time.Parse("2006-01-02", req.Date)
 
+	userIDVal, _ := c.Get("user_id")
+	userID := userIDVal.(uuid.UUID)
+
 	concert := models.Concert{
+		BaseModel: models.BaseModel{
+			CreatedBy: &userID,
+		},
 		Title:       req.Title,
 		Description: req.Description,
 		Date:        parseDate,
@@ -232,19 +195,6 @@ func (h *ConcertHandler) CreateConcert(c *gin.Context) {
 	}).Info("Konser baru berhasil ditambahkan")
 }
 
-// GetConcerts handles GET /api/v1/concerts
-// GetConcerts godoc
-// @Summary      Get all concerts
-// @Description  Retrieve a paginated list of concerts with optional search filter and sorting
-// @Tags         concerts
-// @Accept       json
-// @Produce      json
-// @Param        query    query     dto.ConcertQueryRequest  false  "Query Parameters"
-// @Success      200      {object}  dto.WebResponse{data=[]dto.ConcertResponse,meta=dto.PaginationMeta}
-// @Failure      400      {object}  dto.WebResponse{data=string}
-// @Failure      500      {object}  dto.WebResponse{data=string}
-// @Security     ApiKeyAuth
-// @Router       /concerts [get]
 func (h *ConcertHandler) GetConcerts(c *gin.Context) {
 	var req dto.ConcertQueryRequest
 
@@ -281,21 +231,9 @@ func (h *ConcertHandler) GetConcerts(c *gin.Context) {
 	}).Info("Daftar konser berhasil diambil")
 }
 
-// GetConcertByID handles GET /api/v1/concerts/:id
-// GetConcertByID godoc
-// @Summary      Get concert by ID
-// @Description  Retrieve details of a single concert by its ID
-// @Tags         concerts
-// @Produce      json
-// @Param        id   path      int  true  "Concert ID"
-// @Success      200  {object}  map[string]interface{}
-// @Failure      400  {object}  map[string]interface{}
-// @Failure      404  {object}  map[string]interface{}
-// @Security     ApiKeyAuth
-// @Router       /concerts/{id} [get]
 func (h *ConcertHandler) GetConcertByID(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	id, err := uuid.Parse(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "ID tidak valid"})
 		return
@@ -326,25 +264,9 @@ func (h *ConcertHandler) GetConcertByID(c *gin.Context) {
 	})
 }
 
-// UpdateConcert handles PUT /api/v1/concerts/:id
-// UpdateConcert godoc
-// @Summary      Update concert
-// @Description  Update a concert's details by ID (Admin only)
-// @Tags         concerts
-// @Accept       json
-// @Produce      json
-// @Param        id       path      int             true  "Concert ID"
-// @Param        concert  body      models.Concert  true  "Concert Info to update"
-// @Success      200      {object}  models.Concert
-// @Failure      400      {object}  map[string]interface{}
-// @Failure      404      {object}  map[string]interface{}
-// @Failure      500      {object}  map[string]interface{}
-// @Security     ApiKeyAuth
-// @Security     BearerAuth
-// @Router       /concerts/{id} [put]
 func (h *ConcertHandler) UpdateConcert(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	id, err := uuid.Parse(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID format"})
 		return
@@ -352,7 +274,7 @@ func (h *ConcertHandler) UpdateConcert(c *gin.Context) {
 
 	concert, err := h.service.GetConcertByID(id)
 	if err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
+		if errors.Is(err, gorm.ErrRecordNotFound) || err.Error() == "concert not found" {
 			c.JSON(http.StatusNotFound, gin.H{"error": "Concert not found"})
 			return
 		}
@@ -366,11 +288,15 @@ func (h *ConcertHandler) UpdateConcert(c *gin.Context) {
 		return
 	}
 
+	userIDVal, _ := c.Get("user_id")
+	userID := userIDVal.(uuid.UUID)
+
 	concert.Title = input.Title
 	concert.Description = input.Description
 	concert.Date = input.Date
 	concert.Venue = input.Venue
 	concert.Status = input.Status
+	concert.UpdatedBy = &userID
 
 	if err := h.service.UpdateConcert(&concert); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update concert: " + err.Error()})
@@ -380,30 +306,19 @@ func (h *ConcertHandler) UpdateConcert(c *gin.Context) {
 	c.JSON(http.StatusOK, concert)
 }
 
-// DeleteConcert handles DELETE /api/v1/concerts/:id
-// DeleteConcert godoc
-// @Summary      Delete concert
-// @Description  Delete a concert record by ID (Admin only)
-// @Tags         concerts
-// @Produce      json
-// @Param        id   path      int  true  "Concert ID"
-// @Success      200  {object}  map[string]interface{}
-// @Failure      400  {object}  map[string]interface{}
-// @Failure      404  {object}  map[string]interface{}
-// @Failure      500  {object}  map[string]interface{}
-// @Security     ApiKeyAuth
-// @Security     BearerAuth
-// @Router       /concerts/{id} [delete]
 func (h *ConcertHandler) DeleteConcert(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	id, err := uuid.Parse(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID format"})
 		return
 	}
 
-	if err := h.service.DeleteConcert(id); err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
+	userIDVal, _ := c.Get("user_id")
+	userID := userIDVal.(uuid.UUID)
+
+	if err := h.service.DeleteConcert(id, userID); err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) || err.Error() == "concert not found" {
 			c.JSON(http.StatusNotFound, gin.H{"error": "Concert not found"})
 			return
 		}
@@ -415,7 +330,7 @@ func (h *ConcertHandler) DeleteConcert(c *gin.Context) {
 }
 
 func mapError(err error) (int, string) {
-	if errors.Is(err, gorm.ErrRecordNotFound) {
+	if errors.Is(err, gorm.ErrRecordNotFound) || err.Error() == "concert not found" {
 		return http.StatusNotFound, "Concert not found"
 	}
 	if errors.Is(err, models.ErrConcertAlreadyExists) {
