@@ -7,3 +7,11 @@
 {"client_ip":"::1","latency_ms":10,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/profile","status":200,"time":"2026-07-02 21:09:08"}
 {"action":"concert_list_retrieved","client_ip":"::1","level":"info","msg":"Daftar konser berhasil diambil","query":{"Page":0,"Limit":0,"Search":"","Sort":""},"time":"2026-07-02 21:11:34"}
 {"client_ip":"::1","latency_ms":11,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/concerts","status":200,"time":"2026-07-02 21:11:34"}
+{"level":"info","msg":"Server is starting...","time":"2026-07-07 21:20:24"}
+{"level":"info","msg":"Server is starting...","time":"2026-07-07 21:23:48"}
+{"level":"info","msg":"Server is running on port :8080","time":"2026-07-07 21:23:49"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/notifications/stream","status":401,"time":"2026-07-07 21:23:52"}
+{"action":"auth_login_success","client_ip":"::1","email":"adminkonser@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-07 21:24:28"}
+{"client_ip":"::1","latency_ms":122,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:24:28"}
+{"action":"auth_register_success","client_ip":"::1","email":"test_sse_cust1_6881@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-07 21:24:28"}
+{"client_ip":"::1","latency_ms":136,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-07 21:24:28"}
