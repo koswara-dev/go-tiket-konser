@@ -40,8 +40,8 @@ func InitDB() {
 	if err != nil {
 		log.Fatal("failed to get database instance: ", err)
 	}
-	sqlDB.SetMaxOpenConns(100)
-	sqlDB.SetMaxIdleConns(20)
+	sqlDB.SetMaxOpenConns(50)
+	sqlDB.SetMaxIdleConns(10)
 	sqlDB.SetConnMaxLifetime(1 * time.Hour)
 
 	// auto migrate

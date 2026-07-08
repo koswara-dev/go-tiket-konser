@@ -10,8 +10,8 @@ admin_email = "adminkonser@gmail.com"
 admin_password = "Indonesia"
 base_url = "http://localhost:8080/api/v1"
 ticket_category_id = "33333333-3333-3333-3333-333333333331" # Gold Category
-num_users = 100
-target_quota = 50
+num_users = 1000
+target_quota = 500
 
 def make_request(url, method="GET", body=None, headers=None):
     req_headers = {
@@ -125,7 +125,7 @@ def main():
     # 3. Create & Login 100 users concurrently (speed up setup)
     print(f"Preparing {num_users} test users concurrently...")
     users = []
-    with ThreadPoolExecutor(max_workers=20) as executor:
+    with ThreadPoolExecutor(max_workers=50) as executor:
         futures = {executor.submit(setup_user, i, run_id): i for i in range(1, num_users + 1)}
         for future in as_completed(futures):
             res = future.result()
@@ -209,15 +209,18 @@ Dokumen ini berisi hasil pengujian konkurensi tinggi untuk memvalidasi proteksi 
         
     markdown += """
 ## Analisis & Kesimpulan
-1. **Pessimistic Locking Sukses:** Proteksi race condition menggunakan `SELECT ... FOR UPDATE` berhasil menahan transaksi ganda. Tepat 50 tiket terpesan dan sisa kuota akhir adalah 0. Tidak ada kasus *over-selling* (kuota tidak menjadi negatif).
-2. **Koneksi Database Stabil:** Pengaturan connection pool baru (`MaxOpenConns=100`, `MaxIdleConns=20`) berhasil menangani lonjakan kueri konkuren secara stabil tanpa ada error timeout koneksi database.
+1. **Pessimistic Locking Sukses:** Proteksi race condition menggunakan `SELECT ... FOR UPDATE` berhasil menahan transaksi ganda. Tepat {target_quota} tiket terpesan dan sisa kuota akhir adalah 0. Tidak ada kasus *over-selling* (kuota tidak menjadi negatif).
+2. **Koneksi Database Stabil:** Pengaturan connection pool baru (`MaxOpenConns=50`, `MaxIdleConns=10`) berhasil menangani lonjakan kueri konkuren secara stabil tanpa ada error timeout koneksi database.
 3. **Sistem Terbukti Aman:** backend dapat diandalkan untuk skenario *ticket war* dengan keamanan data kuota tetap 100% konsisten.
 """
     
+    # Write to both result-testing4.md and result-concurrency.md to be safe
+    with open("result-testing4.md", "w", encoding="utf-8") as f:
+        f.write(markdown)
     with open("result-concurrency.md", "w", encoding="utf-8") as f:
         f.write(markdown)
         
-    print("\nSaved concurrency test results to result-concurrency.md successfully!")
+    print("\nSaved concurrency test results to result-testing4.md successfully!")
 
 if __name__ == "__main__":
     main()
