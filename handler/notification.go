@@ -49,11 +49,16 @@ func (h *NotificationHandler) Stream(c *gin.Context) {
 	c.SSEvent("info", "SSE connection established")
 
 	c.Stream(func(w io.Writer) bool {
-		if msg, ok := <-ch; ok {
-			c.SSEvent("message", msg)
-			return true
+		select {
+		case msg, ok := <-ch:
+			if ok {
+				c.SSEvent("message", msg)
+				return true
+			}
+			return false
+		case <-c.Request.Context().Done():
+			return false
 		}
-		return false
 	})
 }
 

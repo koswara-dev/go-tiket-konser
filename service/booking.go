@@ -51,7 +51,7 @@ func (s *bookingService) CreateBooking(req *dto.BookingRequest, userID uuid.UUID
 
 		var totalAmount float64
 		var details []models.BookingDetail
-		bookingCode := fmt.Sprintf("TIX-%d-%d", time.Now().Unix(), time.Now().UnixNano()%1000)
+		bookingCode := fmt.Sprintf("TIX-%d-%s", time.Now().Unix(), uuid.New().String()[:8])
 
 		// 2. Buat reservasi utama
 		finalBooking = models.Booking{

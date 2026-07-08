@@ -35,6 +35,15 @@ func InitDB() {
 		log.Fatal("failed to connect database: ", err)
 	}
 
+	// Configure connection pool
+	sqlDB, err := DB.DB()
+	if err != nil {
+		log.Fatal("failed to get database instance: ", err)
+	}
+	sqlDB.SetMaxOpenConns(100)
+	sqlDB.SetMaxIdleConns(20)
+	sqlDB.SetConnMaxLifetime(1 * time.Hour)
+
 	// auto migrate
 	err = DB.AutoMigrate(&models.User{}, &models.Customer{}, &models.Concert{}, &models.TicketCategory{},
 		&models.Booking{}, &models.BookingDetail{})

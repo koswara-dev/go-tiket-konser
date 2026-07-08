@@ -15,3 +15,564 @@
 {"client_ip":"::1","latency_ms":122,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:24:28"}
 {"action":"auth_register_success","client_ip":"::1","email":"test_sse_cust1_6881@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-07 21:24:28"}
 {"client_ip":"::1","latency_ms":136,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-07 21:24:28"}
+{"action":"auth_login_success","client_ip":"::1","email":"adminkonser@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-07 21:24:56"}
+{"client_ip":"::1","latency_ms":73,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:24:56"}
+{"action":"auth_register_success","client_ip":"::1","email":"test_sse_cust1_2142@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-07 21:24:56"}
+{"client_ip":"::1","latency_ms":84,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-07 21:24:56"}
+{"action":"auth_login_success","client_ip":"::1","email":"test_sse_cust1_2142@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-07 21:24:56"}
+{"client_ip":"::1","latency_ms":72,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:24:56"}
+{"action":"auth_register_success","client_ip":"::1","email":"test_sse_cust2_3930@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-07 21:24:56"}
+{"client_ip":"::1","latency_ms":86,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-07 21:24:56"}
+{"action":"auth_login_success","client_ip":"::1","email":"adminkonser@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-07 21:25:09"}
+{"client_ip":"::1","latency_ms":103,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:25:09"}
+{"action":"auth_register_success","client_ip":"::1","email":"test_sse_cust1_1940@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-07 21:25:09"}
+{"client_ip":"::1","latency_ms":117,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-07 21:25:09"}
+{"action":"auth_login_success","client_ip":"::1","email":"test_sse_cust1_1940@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-07 21:25:09"}
+{"client_ip":"::1","latency_ms":103,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:25:09"}
+{"action":"auth_register_success","client_ip":"::1","email":"test_sse_cust2_3636@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-07 21:25:09"}
+{"client_ip":"::1","latency_ms":106,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-07 21:25:09"}
+{"action":"auth_login_success","client_ip":"::1","email":"test_sse_cust2_3636@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-07 21:25:09"}
+{"client_ip":"::1","latency_ms":96,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:25:09"}
+{"action":"concert_created","client_ip":"::1","concert_id":"0624cd03-7d2d-49a7-91d5-0d693f1af633","level":"info","msg":"Konser baru berhasil ditambahkan","time":"2026-07-07 21:25:11"}
+{"client_ip":"::1","latency_ms":52,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/concerts","status":201,"time":"2026-07-07 21:25:11"}
+{"client_ip":"::1","latency_ms":38,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-07 21:25:13"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/notifications/stream","status":401,"time":"2026-07-07 21:25:15"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/chat/ws","status":401,"time":"2026-07-07 21:25:15"}
+{"client_ip":"::1","latency_ms":33,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/chat/rooms","status":200,"time":"2026-07-07 21:25:15"}
+{"client_ip":"::1","latency_ms":2,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/chat/rooms/cb05c994-493c-445e-bd75-9394a8e7a2c7/messages","status":200,"time":"2026-07-07 21:25:15"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/chat/ws","status":401,"time":"2026-07-07 21:25:15"}
+{"client_ip":"::1","latency_ms":1,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/chat/rooms/cb05c994-493c-445e-bd75-9394a8e7a2c7/messages","status":403,"time":"2026-07-07 21:25:15"}
+{"action":"auth_login_success","client_ip":"::1","email":"adminkonser@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-07 21:25:42"}
+{"client_ip":"::1","latency_ms":77,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:25:42"}
+{"action":"auth_register_success","client_ip":"::1","email":"test_sse_cust1_3867@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-07 21:25:43"}
+{"client_ip":"::1","latency_ms":94,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-07 21:25:43"}
+{"action":"auth_login_success","client_ip":"::1","email":"test_sse_cust1_3867@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-07 21:25:43"}
+{"client_ip":"::1","latency_ms":96,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:25:43"}
+{"action":"auth_register_success","client_ip":"::1","email":"test_sse_cust2_2503@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-07 21:25:43"}
+{"client_ip":"::1","latency_ms":99,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-07 21:25:43"}
+{"action":"auth_login_success","client_ip":"::1","email":"test_sse_cust2_2503@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-07 21:25:43"}
+{"client_ip":"::1","latency_ms":92,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-07 21:25:43"}
+{"action":"concert_created","client_ip":"::1","concert_id":"0970b295-f02b-4a7b-91af-be2e24729837","level":"info","msg":"Konser baru berhasil ditambahkan","time":"2026-07-07 21:25:45"}
+{"client_ip":"::1","latency_ms":35925,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/notifications/stream","status":200,"time":"2026-07-07 21:25:45"}
+{"client_ip":"::1","latency_ms":7,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/concerts","status":201,"time":"2026-07-07 21:25:45"}
+{"client_ip":"::1","latency_ms":16,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-07 21:25:47"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/notifications/stream","status":401,"time":"2026-07-07 21:25:49"}
+{"client_ip":"::1","latency_ms":7,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/chat/ws","status":200,"time":"2026-07-07 21:25:49"}
+{"client_ip":"::1","latency_ms":1,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/chat/ws","status":200,"time":"2026-07-07 21:25:49"}
+{"client_ip":"::1","latency_ms":13,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/chat/rooms","status":200,"time":"2026-07-07 21:25:49"}
+{"client_ip":"::1","latency_ms":2,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/chat/rooms/48f308a4-50bd-450d-a971-720214db95e3/messages","status":200,"time":"2026-07-07 21:25:49"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/chat/ws","status":401,"time":"2026-07-07 21:25:49"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/chat/rooms/48f308a4-50bd-450d-a971-720214db95e3/messages","status":403,"time":"2026-07-07 21:25:49"}
+{"client_ip":"::1","latency_ms":16,"level":"warning","method":"OPTIONS","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/auth/refresh","status":401,"time":"2026-07-08 02:58:49"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/auth/captcha","status":401,"time":"2026-07-08 02:58:49"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/auth/captcha","status":401,"time":"2026-07-08 02:58:49"}
+{"client_ip":"::1","latency_ms":1,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/auth/captcha","status":401,"time":"2026-07-08 05:51:49"}
+{"client_ip":"::1","latency_ms":0,"level":"warning","method":"GET","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/auth/captcha","status":401,"time":"2026-07-08 05:51:49"}
+{"level":"info","msg":"Server is starting...","time":"2026-07-08 20:46:42"}
+{"level":"info","msg":"Server is running on port :8080","time":"2026-07-08 20:46:42"}
+{"action":"auth_login_success","client_ip":"::1","email":"adminkonser@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:20"}
+{"client_ip":"::1","latency_ms":78,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:20"}
+{"action":"auth_login_success","client_ip":"::1","email":"adminkonser@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":74,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":29,"level":"info","method":"PUT","msg":"HTTP Request sukses diproses","path":"/api/v1/ticket-categories/33333333-3333-3333-3333-333333333331","status":200,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_4_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":253,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_9_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":240,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_10_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":240,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_2_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":302,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_12_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":187,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_6_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":298,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_11_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":221,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_13_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":188,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_7_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:33"}
+{"client_ip":"::1","latency_ms":281,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:33"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_3_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":413,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_2_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":112,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_9_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":159,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_16_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":291,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_6_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":143,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_1_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":465,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_13_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":187,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_17_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":314,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_16_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":100,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_8_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":536,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_7_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":251,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_10_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":270,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_20_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":315,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_5_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":614,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_21_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":181,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_14_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":458,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_15_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":489,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_4_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":387,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_17_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":116,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_11_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":386,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_18_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":470,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_22_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":247,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_24_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":182,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_1_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":257,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_19_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":456,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_3_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":352,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_12_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":497,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_25_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":157,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_23_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":348,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_8_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":171,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_21_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":102,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_26_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":194,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_27_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":173,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_20_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":181,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_15_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":149,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_5_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":173,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_22_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":130,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_24_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":148,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_28_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":252,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_18_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":159,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_29_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":190,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_14_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":298,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_19_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":181,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_31_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":194,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_23_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":104,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_30_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":260,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_25_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":196,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_27_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":174,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_34_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":196,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_26_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":207,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_33_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":235,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_32_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":318,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_35_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":232,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_37_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":312,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_40_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":239,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_29_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":184,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_31_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:34"}
+{"client_ip":"::1","latency_ms":181,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:34"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_30_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":206,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_39_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":303,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_28_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":252,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_38_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":325,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_45_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":210,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_43_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":253,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_42_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":259,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_33_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":106,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_36_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":450,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_41_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":325,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_35_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":144,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_34_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":223,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_32_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":162,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_46_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":289,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_37_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":176,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_44_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":399,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_40_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":206,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_47_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":352,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_36_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":162,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_38_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":198,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_45_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":203,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_48_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":283,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_44_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":151,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_42_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":277,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_51_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":301,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_41_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":288,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_52_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":293,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_39_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":336,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_43_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":322,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_49_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":389,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_47_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":129,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_46_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":388,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_50_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":453,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_58_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":185,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_57_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":366,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_55_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":426,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_53_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":427,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_48_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":137,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_56_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":433,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_59_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":164,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_51_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":193,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_60_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":225,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_61_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":202,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_52_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":209,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_62_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":214,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_54_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":551,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_65_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":122,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_63_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":272,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_50_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":154,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_58_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":115,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_66_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":179,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_49_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":186,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_55_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":130,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_64_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":248,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_57_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":167,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_68_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":143,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_67_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":244,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_53_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":174,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_62_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":131,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_61_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":160,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_54_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":168,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:35"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_56_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:35"}
+{"client_ip":"::1","latency_ms":272,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_59_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":228,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_60_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":248,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_70_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":228,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_69_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":256,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_65_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":234,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_66_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":143,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_64_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":144,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_63_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":314,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_68_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":194,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_71_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":362,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_75_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":209,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_76_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":149,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_78_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":152,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_67_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":203,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_73_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":342,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_80_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":162,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_77_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":225,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_74_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":334,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_70_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":127,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_72_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":383,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_69_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":136,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_81_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":196,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_71_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":106,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_85_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":188,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_86_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":191,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_73_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":125,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_76_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":202,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_82_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":408,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_83_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":351,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_79_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":419,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_77_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":181,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_75_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":264,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_78_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":293,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_87_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":317,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_80_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":292,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_84_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":456,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_85_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":124,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_74_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":186,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_72_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":154,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_88_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":352,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_86_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":155,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_92_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":166,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_91_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":175,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_89_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":285,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_83_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":100,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_81_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":241,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_79_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":147,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_93_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":170,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_82_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":170,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_90_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":323,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_88_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":143,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_94_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:36"}
+{"client_ip":"::1","latency_ms":244,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:36"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_97_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":171,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:37"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_96_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":174,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_87_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":190,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_92_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":97,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_91_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":132,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_100_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":245,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:37"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_95_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":304,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_84_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":251,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_93_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":144,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_98_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":273,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_94_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":113,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_97_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":106,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_96_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":95,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_register_success","client_ip":"::1","email":"concur_user_99_5169@gmail.com","level":"info","msg":"User baru berhasil terdaftar","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":293,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/register","status":201,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_89_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":204,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_90_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":221,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_100_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":97,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_95_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":99,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_98_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":102,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"action":"auth_login_success","client_ip":"::1","email":"concur_user_99_5169@gmail.com","level":"info","msg":"User berhasil login","time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":84,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/login","status":200,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":70,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":60,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":42,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":120,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":40,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":49,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":120,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":113,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":66,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":194,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":216,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":31,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":203,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":243,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":157,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":249,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":37,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":230,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":285,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":92,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":83,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":100,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":331,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":127,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":353,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":258,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":112,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":358,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":358,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":121,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":122,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":371,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":344,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":90,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":78,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":388,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":384,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":439,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":391,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":392,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":442,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":411,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":507,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":445,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":473,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":494,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":584,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":489,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":303,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":648,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":570,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":492,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":496,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":507,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":543,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":536,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":583,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":574,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":643,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":597,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:37"}
+{"client_ip":"::1","latency_ms":560,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":754,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":396,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":615,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":689,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":621,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":605,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":667,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":674,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":690,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":822,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":903,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":734,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":881,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":980,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":947,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":787,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":901,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":797,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":765,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":942,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":948,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":919,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1003,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":840,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":938,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1150,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":833,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":862,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":943,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1055,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":995,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1128,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1116,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":988,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1083,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1095,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1023,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1154,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":1293,"level":"info","method":"POST","msg":"HTTP Request sukses diproses","path":"/api/v1/bookings","status":201,"time":"2026-07-08 20:47:38"}
+{"client_ip":"::1","latency_ms":10,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/ticket-categories/33333333-3333-3333-3333-333333333331","status":200,"time":"2026-07-08 20:47:38"}
