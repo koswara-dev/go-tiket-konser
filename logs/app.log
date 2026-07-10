@@ -11096,3 +11096,6 @@
 {"client_ip":"::1","latency_ms":10239,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 21:20:03"}
 {"client_ip":"::1","latency_ms":9301,"level":"warning","method":"POST","msg":"Permintaan klien tidak valid atau otorisasi gagal","path":"/api/v1/bookings","status":400,"time":"2026-07-08 21:20:04"}
 {"client_ip":"::1","latency_ms":6,"level":"info","method":"GET","msg":"HTTP Request sukses diproses","path":"/api/v1/ticket-categories/33333333-3333-3333-3333-333333333331","status":200,"time":"2026-07-08 21:20:04"}
+{"level":"info","msg":"Server is starting...","time":"2026-07-10 13:05:16"}
+{"level":"info","msg":"Server is starting...","time":"2026-07-10 13:05:39"}
+{"level":"info","msg":"Server is running on port :8080","time":"2026-07-10 13:05:40"}
