@@ -19,6 +19,7 @@ import (
 func SetupRouter(db *gorm.DB) *gin.Engine {
 	r := gin.New()
 
+	r.Use(middleware.CORSMiddleware())
 	r.Use(gin.Recovery())
 	r.Use(middleware.LoggerMiddleware())
 
